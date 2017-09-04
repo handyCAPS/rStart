@@ -1,0 +1,19 @@
+
+
+.FormInputGroup {
+
+}
+
+.Form__input, .Form__label {
+   padding: 0.25em 0.5em;
+}
+
+.Form__label {
+  display: inline-block;
+  width: 30%;
+  text-align: right;
+}
+
+.Form__input {
+  width: calc(70%);
+}
