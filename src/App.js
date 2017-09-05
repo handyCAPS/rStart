@@ -1,15 +1,28 @@
 // @flow
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 
-import Form from './components/Form/Form';
+import LinkForm from './components/LinkForm/LinkForm';
+
+import firebase from './firebase';
 
 type Props = {};
 
 type State = {};
 
 class App extends React.Component<Props, State> {
+
+	constructor() {
+		super();
+
+		this.handleFormSubmit = this.handleFormSubmit.bind(this);
+	}
+
+	handleFormSubmit(formValues) {
+		console.dir(formValues);
+	}
+
   render() {
     return (
       <div className="outerWrap">
@@ -17,7 +30,7 @@ class App extends React.Component<Props, State> {
         <div className="body">
           <div className="third"></div>
           <div className="third">
-            <Form />
+            <LinkForm handleFormSubmit={this.handleFormSubmit} />
           </div>
           <div className="third"></div>
         </div>
