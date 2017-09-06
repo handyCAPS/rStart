@@ -11,7 +11,7 @@ type Input = {
 };
 
 type Props = {
-	handleFormSubmit: any;
+	handleFormSubmit: Function;
 	inputArray?: Array<any>;
 };
 
@@ -20,6 +20,10 @@ type State = {
 };
 
 class LinkForm extends React.Component<Props, State> {
+
+	handleInputChange: Function;
+	handleSubmit: Function;
+	getFormValues: Function;
 
 	constructor() {
 		super();
@@ -67,7 +71,7 @@ class LinkForm extends React.Component<Props, State> {
 		});
 	}
 
-	handleSubmit(event) {
+	handleSubmit(event: Event) {
 		event.preventDefault();
 		this.props.handleFormSubmit(this.getFormValues());
 		this.setState({inputs: this.inputArray});

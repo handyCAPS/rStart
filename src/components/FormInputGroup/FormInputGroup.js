@@ -9,14 +9,17 @@ type Props = {
 		key: number;
 		index: number;
 		value?: string;
+		attributes?: any;
 		labelClasses?: Array<string>;
 		inputClasses?: Array<string>;
-		handleChange: any;
+		handleChange: Function;
 };
 
 type State = {};
 
 class FormInputGroup extends React.Component<Props, State> {
+
+	handleChange: Function;
 
 	constructor() {
 		super();

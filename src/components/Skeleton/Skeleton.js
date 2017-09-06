@@ -10,7 +10,7 @@ type State = {};
 class Skeleton extends React.Component<Props, State> {
   render() {
     return (
-    	<div className="Skeleton" {...this.props}></div>
+    	<div className="Skeleton"></div>
       );
   }
 }
