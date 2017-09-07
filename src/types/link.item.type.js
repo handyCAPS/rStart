@@ -3,4 +3,11 @@ export type linkItem = {
 	title: string;
 	link: string;
 	category: string;
+	imgLocation: string;
+};
+
+export type linkStorageItem = linkItem & {
+	dateAdded: string;
+	dateAltered: string;
+	clicks: number;
 };

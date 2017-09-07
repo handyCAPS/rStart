@@ -8,6 +8,7 @@ import './LinkForm.css';
 type Input = {
 	id: string;
 	value: string;
+	attributes?: any;
 };
 
 type Props = {
@@ -31,15 +32,24 @@ class LinkForm extends React.Component<Props, State> {
 		this.inputArray = [
 			{
 				id: 'title',
-				value: ''
+				value: '',
+				attributes: {
+					required: true
+				}
 			},
 			{
 				id: 'link',
-				value: ''
+				value: '',
+				attributes: {
+					required: true
+				}
 			},
 			{
 				id: 'category',
-				value: ''
+				value: '',
+				attributes: {
+					required: true
+				}
 			}
 		];
 
