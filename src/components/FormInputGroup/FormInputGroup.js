@@ -13,6 +13,7 @@ type Props = {
 		labelClasses?: Array<string>;
 		inputClasses?: Array<string>;
 		handleChange: Function;
+		errors: Array;
 };
 
 type State = {};
@@ -20,14 +21,6 @@ type State = {};
 class FormInputGroup extends React.Component<Props, State> {
 
 	handleChange: Function;
-
-	parseAttributes: Function;
-
-	handleAttributes: Function;
-
-	hasAttributes: boolean;
-
-	inputAttributes: any;
 
 	constructor() {
 		super();
@@ -50,26 +43,7 @@ class FormInputGroup extends React.Component<Props, State> {
 		this.props.handleChange(this.props.index, event.target.value);
 	}
 
-	getAttributes() {
-		let attributeObject = {};
-		if (typeof this.props.attributes !== 'undefined') {
-			for (let att in this.props.attributes) {
-				attributeObject[att] = this.props.attributes[att];
-			}
-		}
-		return this.parseAttributes(attributeObject);
-	}
-
-	parseAttributes(attributeObject: any) {
-		let attributeString = '';
-		for (let att in attributeObject) {
-			attributeString += att + "=" + "'" + attributeObject[att] + "'";
-		}
-		return attributeString;
-	}
-
 	render() {
-		const inputAttributes = this.getAttributes();
 		return (
 				<p className="FormInputGroup">
 					<label
@@ -82,7 +56,9 @@ class FormInputGroup extends React.Component<Props, State> {
 							value={this.props.value}
 							onChange={this.handleChange}
 							{...this.props.attributes}
+							// required="true"
 							className={this.getClassList('input')}/>
+							<span className="Form__input__errors">{this.props.errors.join(' ')}</span>
 				</p>
 				);
 	}
