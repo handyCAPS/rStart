@@ -5,6 +5,9 @@ import FormInputGroup from '../FormInputGroup/FormInputGroup';
 
 import './LinkForm.css';
 
+
+import Button from '../Button/Button.js';
+
 type Input = {
 	id: string;
 	value: string;
@@ -116,10 +119,19 @@ class LinkForm extends React.Component<Props, State> {
 	}
 
   render() {
+  	const submitButtonProps = {
+  		label: 'Submit',
+  		type: 'submit',
+  		classNames: ['Form__button', 'Form__button--submit'],
+  		styles: {
+  			color: 'grey',
+  			backgroundColor: 'white'
+  		}
+  	};
     return (
       <div className="Form">
         <form onSubmit={this.handleSubmit}>
-          <fieldset>
+          <fieldset className="Form__fieldset">
               { this.state.inputs.map((input, i) => (
               		<FormInputGroup
               			key={i}
@@ -130,9 +142,7 @@ class LinkForm extends React.Component<Props, State> {
               			handleChange={this.handleInputChange}
               			value={input.value} />
               	)) }
-              <button
-              	className="Form__button Form__button--submit"
-              	type="submit">Submit</button>
+            	<Button {...submitButtonProps} />
           </fieldset>
         </form>
       </div>
