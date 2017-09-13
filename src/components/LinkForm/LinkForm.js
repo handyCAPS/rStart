@@ -6,6 +6,8 @@ import FormInputGroup from '../FormInputGroup/FormInputGroup';
 import './LinkForm.css';
 
 
+import Colors from '../../vars/colors';
+
 import Button from '../Button/Button.js';
 
 type Input = {
@@ -124,8 +126,9 @@ class LinkForm extends React.Component<Props, State> {
   		type: 'submit',
   		classNames: ['Form__button', 'Form__button--submit'],
   		styles: {
-  			color: 'grey',
-  			backgroundColor: 'white'
+  			color: Colors.main,
+  			border: '2px solid ' + Colors.main,
+  			borderRadius: '5px'
   		}
   	};
     return (

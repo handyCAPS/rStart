@@ -2,6 +2,8 @@
 
 .Button {
 	border: none;
-	font-size: 1rem;
+	font-size: 1em;
 	padding: 0.618em 1em;
+	background: none;
+	cursor: pointer;
 }
