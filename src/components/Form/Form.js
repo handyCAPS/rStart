@@ -85,7 +85,7 @@ class Form extends React.Component<Props, State> {
 		event.preventDefault();
 		if (!this.checkFormForErrors()) { return; }
 		this.props.handleFormSubmit(this.getFormValues());
-		this.setState({inputs: this.inputArray});
+		this.setState({inputs: this.props.inputArray});
 	}
 
   render() {
