@@ -3,3 +3,7 @@
 .Form {
 
 }
+
+.Form__buttons {
+	text-align: right;
+}

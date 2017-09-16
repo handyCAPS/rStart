@@ -57,7 +57,7 @@ class Form extends React.Component<Props, State> {
 						cur.errors.push('This field is required');
 						noErrors = false;
 					}
-				default:
+				default: // eslint-disable-line no-fallthrough
 					break;
 			}
 			prev.push(cur);
@@ -113,7 +113,7 @@ class Form extends React.Component<Props, State> {
               			handleChange={this.handleInputChange}
               			value={input.value} />
               	)) }
-            	<Button {...submitButtonProps} />
+            	<p className="Form__buttons"><Button {...submitButtonProps} /></p>
           </fieldset>
         </form>
       </div>
