@@ -3,3 +3,16 @@
 .Link {
 
 }
+
+.Link__delete {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 1.2rem;
+	height: 1.2rem;
+	font-size: 0.6em;
+	cursor: pointer;
+	border: 1px solid green;
+	border-radius: 50%;
+	box-shadow: 0 0 0.3em rgba(0,0,0,0.27);
+}
