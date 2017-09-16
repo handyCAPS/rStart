@@ -71,7 +71,7 @@ class App extends React.Component<Props, State> {
 	}
 
 	handleDelete(type: string, id: string) {
-		const itemsRef = firebase.database()
+		firebase.database()
 			.ref(type)
 			.child(id)
 			.remove();
@@ -89,6 +89,7 @@ class App extends React.Component<Props, State> {
           <div className="col third">
           	{this.state.links.map((link, i) => (
           			<Link
+          				key={i}
           				{...link}
             			handleDelete={this.handleDelete.bind(null, this.Columns.link)} />
           		))}

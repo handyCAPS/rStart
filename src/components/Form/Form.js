@@ -30,10 +30,10 @@ class Form extends React.Component<Props, State> {
 	getFormValues: Function;
 	checkFormForErrors: Function;
 
-	constructor() {
-		super();
+	constructor(props) {
+		super(props);
 
-		this.state = {inputs: undefined};
+		this.state = {inputs: props.inputArray};
 
 		this.handleInputChange = this.handleInputChange.bind(this);
 		this.getFormValues = this.getFormValues.bind(this);
@@ -86,10 +86,6 @@ class Form extends React.Component<Props, State> {
 		if (!this.checkFormForErrors()) { return; }
 		this.props.handleFormSubmit(this.getFormValues());
 		this.setState({inputs: this.inputArray});
-	}
-
-	componentWillMount() {
-	    this.setState({inputs: this.props.inputArray});
 	}
 
   render() {

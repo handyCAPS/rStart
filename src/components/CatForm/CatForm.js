@@ -35,7 +35,7 @@ class CatForm extends React.Component<Props, State> {
   render() {
     return (
     	<Form
-    		handleSubmit={this.props.handleFormSubmit}
+    		handleFormSubmit={this.props.handleFormSubmit}
     		inputArray={this.inputArray} />
       );
   }
