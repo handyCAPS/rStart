@@ -5,36 +5,53 @@ import './Select.css';
 
 import { InputSelect } from '../../types/input.type';
 
-type SelectClassNames = {
+type SelectClassList = {
 	select: Array<string>;
 	options: Array<string>;
 };
 
 type Props = InputSelect & {
 	handleChange: Function;
-	classNames?: SelectClassNames;
+	classList?: SelectClassList;
 };
 
 type State = {};
 
 class Select extends React.Component<Props, State> {
+
+	getClassList: Function;
+
+	getClassList(propClassList: any): any {
+		const classList = {
+			select: ['Select'],
+			options: ['Select__option']
+		};
+		if (!propClassList) {
+			return classList;
+		}
+		if (Array.isArray(propClassList.select)) {
+			classList.select = [...classList.select, ...propClassList.select]
+		}
+		if (Array.isArray(propClassList.options)) {
+			classList.options = [...classList.options, ...propClassList.options]
+		}
+
+		return classList;
+	}
+
   render() {
-  	const hasClassNames = !!this.props.classNames;
-  	const propNamesSelect = hasClassNames ? (this.props.classNames.select || []) : [];
-  	const selectClassNames = ['Form__input', 'Form__input--select', [...propNamesSelect]];
-  	const propNamesOptions = hasClassNames ? (this.props.classNames.options || []) : [];
-  	const optionsClassNames = ['Form__option', [...propNamesOptions]];
+  	const classList = this.getClassList(this.props.classList);
     return (
     	<select
     		name={this.props.id}
     		id={this.props.id}
     		onChange={this.props.handleChange}
-    		className={selectClassNames.join(' ')}>
+    		className={classList.select.join(' ')}>
     		{this.props.options.map((option, index) => (
     			<option
     				key={index}
-    				className={optionsClassNames.join(' ')}
-    				value={option.value}>{option.label || option.value}</option>
+    				className={classList.options.join(' ')}
+    				value={option.value}>{option.label !== undefined ? option.label : option.value}</option>
     			))}
   		</select>
       );

@@ -58,7 +58,11 @@ class FormInputGroup extends React.Component<Props, State> {
 					{ this.props.type === 'select' &&
 					<Select
 						id={this.props.id}
-						handleChange={this.props.handleChange}
+						classList={({
+							select: ['Form__input', 'Form__input--select'],
+							options: ['Form__option']
+						})}
+						handleChange={this.handleChange}
 						options={this.props.children} /> }
 					{ this.props.type !== 'select' &&
 					<input
