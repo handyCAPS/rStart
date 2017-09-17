@@ -56,8 +56,11 @@ class FormInputGroup extends React.Component<Props, State> {
 							className={this.getClassList('label')}>{this.props.label}
 					</label>
 					{ this.props.type === 'select' &&
-					<Select id={this.props.id} options={this.props.children} />
-					 ||
+					<Select
+						id={this.props.id}
+						handleChange={this.props.handleChange}
+						options={this.props.children} /> }
+					{ this.props.type !== 'select' &&
 					<input
 							type="text"
 							id={this.props.id}

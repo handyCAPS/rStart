@@ -11,6 +11,7 @@ type SelectClassNames = {
 };
 
 type Props = InputSelect & {
+	handleChange: Function;
 	classNames?: SelectClassNames;
 };
 
@@ -22,11 +23,12 @@ class Select extends React.Component<Props, State> {
   	const propNamesSelect = hasClassNames ? (this.props.classNames.select || []) : [];
   	const selectClassNames = ['Form__input', 'Form__input--select', [...propNamesSelect]];
   	const propNamesOptions = hasClassNames ? (this.props.classNames.options || []) : [];
-  	const optionsClassNames = ['Form__input', 'Form__input--options', [...propNamesOptions]];
+  	const optionsClassNames = ['Form__option', [...propNamesOptions]];
     return (
     	<select
     		name={this.props.id}
     		id={this.props.id}
+    		onChange={this.props.handleChange}
     		className={selectClassNames.join(' ')}>
     		{this.props.options.map((option, index) => (
     			<option

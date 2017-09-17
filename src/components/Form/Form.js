@@ -3,7 +3,6 @@
 import React from 'react';
 
 import FormInputGroup from '../FormInputGroup/FormInputGroup';
-import Select from '../Select/Select';
 
 import './Form.css';
 
@@ -104,7 +103,6 @@ class Form extends React.Component<Props, State> {
       <div className="Form">
         <form onSubmit={this.handleSubmit}>
           <fieldset className="Form__fieldset">
-          		<Select id="select" options={[{value: 'firstoption'}]} />
               { this.state.inputs.map((input, i) => (
               		<FormInputGroup
               			key={i}
