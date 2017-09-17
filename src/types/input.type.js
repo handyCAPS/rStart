@@ -1,6 +1,8 @@
 export type Input = {
 	id: string;
 	label?: string;
+	type?: string;
+	children?: Array<any>;
 	value: string;
 	errors: Array;
 	attributes?: any;

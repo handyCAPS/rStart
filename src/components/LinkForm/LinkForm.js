@@ -5,21 +5,24 @@ import './LinkForm.css';
 
 import Form from '../Form/Form';
 
+import { InputOption } from '../../types/input.type';
+
 type Props = {
 	categories: Array<any>;
 	handleFormSubmit: Function;
 };
 
-type State = {};
+type State = {
+	inputArray: Array<Input>;
+};
 
 class LinkForm extends React.Component<Props, State> {
 
-	inputArray: Array<Input>;
+	catsToOptionsArray: Function;
 
-	constructor() {
-		super();
-
-		this.inputArray = [
+	constructor(props) {
+		super(props);
+		const inputArray = [
 			{
 				id: 'title',
 				value: '',
@@ -38,6 +41,8 @@ class LinkForm extends React.Component<Props, State> {
 			},
 			{
 				id: 'category',
+				type: 'select',
+				children: props.categories,
 				value: '',
 				attributes: {
 					required: true
@@ -46,14 +51,36 @@ class LinkForm extends React.Component<Props, State> {
 			}
 		];
 
+		this.state = { inputArray };
+
 	}
 
+	catsToOptionsArray(categories: Array<any>): Array<InputOption> {
+		return categories.map(cat => (
+			 {
+				label: cat.name,
+				value: cat.id
+			}
+		));
+	}
+
+	componentWillReceiveProps(nextProps) {
+	    if(nextProps.categories.length > 0) {
+	    	this.setState({inputArray: this.state.inputArray.reduce((p,c) => {
+	    		if (c.hasOwnProperty('children')) {
+	    			c.children = this.catsToOptionsArray(nextProps.categories);
+	    		}
+	    		p.push(c);
+	    		return p;
+	    	},[])});
+	    }
+	}
 
   render() {
     return (
       <div>
       	<Form
-      	inputArray={this.inputArray}
+      	inputArray={this.state.inputArray}
       	handleFormSubmit={this.props.handleFormSubmit} />
       </div>
     	);

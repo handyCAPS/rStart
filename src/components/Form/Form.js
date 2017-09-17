@@ -111,6 +111,8 @@ class Form extends React.Component<Props, State> {
               			index={i}
               			id={input.id}
               			label={input.id}
+              			type={input.type}
+              			children={input.children}
               			errors={input.errors}
               			handleChange={this.handleInputChange}
               			value={input.value} />

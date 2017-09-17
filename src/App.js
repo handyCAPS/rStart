@@ -20,6 +20,7 @@ type Props = {};
 
 type State = {
 	links: Array<linkItem>;
+	categories: Array<any>;
 };
 
 class App extends React.Component<Props, State> {

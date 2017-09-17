@@ -1,6 +1,8 @@
 // @flow
 import React from 'react';
 
+import Select from '../Select/Select';
+
 import './FormInputGroup.css';
 
 
@@ -9,6 +11,8 @@ type Props = {
 		label: string;
 		key: number;
 		index: number;
+		type?: string;
+		children?: Array<any>;
 		value?: string;
 		attributes?: any;
 		labelClasses?: Array<string>;
@@ -51,6 +55,9 @@ class FormInputGroup extends React.Component<Props, State> {
 							htmlFor={this.props.id}
 							className={this.getClassList('label')}>{this.props.label}
 					</label>
+					{ this.props.type === 'select' &&
+					<Select id={this.props.id} options={this.props.children} />
+					 ||
 					<input
 							type="text"
 							id={this.props.id}
@@ -58,7 +65,7 @@ class FormInputGroup extends React.Component<Props, State> {
 							onChange={this.handleChange}
 							{...this.props.attributes}
 							// required="true"
-							className={this.getClassList('input')}/>
+							className={this.getClassList('input')}/> }
 							<span className="Form__input__errors">{this.props.errors.join(' ')}</span>
 				</p>
 				);
