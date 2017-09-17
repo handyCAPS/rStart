@@ -6,6 +6,7 @@ import './LinkForm.css';
 import Form from '../Form/Form';
 
 type Props = {
+	categories: Array<any>;
 	handleFormSubmit: Function;
 };
 
@@ -50,9 +51,11 @@ class LinkForm extends React.Component<Props, State> {
 
   render() {
     return (
-      <Form
+      <div>
+      	<Form
       	inputArray={this.inputArray}
       	handleFormSubmit={this.props.handleFormSubmit} />
+      </div>
     	);
   }
 }

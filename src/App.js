@@ -29,11 +29,17 @@ class App extends React.Component<Props, State> {
 	handleFormSubmit: Function;
 	handleDelete: Function;
 	getLinks: Function;
+	getCategories: Function;
 
 	constructor() {
 		super();
 
-		this.state = ({links: []});
+		this.state = (
+			{
+				links: [],
+				categories: []
+			}
+		);
 
 		this.Columns = {
 			link: 'link',
@@ -42,6 +48,7 @@ class App extends React.Component<Props, State> {
 
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 		this.getLinks = this.getLinks.bind(this);
+		this.getCategories = this.getCategories.bind(this);
 	}
 
 	getLinks() {
@@ -65,6 +72,23 @@ class App extends React.Component<Props, State> {
 		});
 	}
 
+	getCategories() {
+		const catsRef = firebase.database().ref(this.Columns.category);
+		catsRef.on('value', snapshot => {
+			let items = snapshot.val();
+			let newState = [];
+
+			for (let item in items) {
+				newState.push({
+					id: item,
+					name: items[item].name
+				});
+			}
+
+			this.setState({categories: newState});
+		});
+	}
+
 	handleFormSubmit(type: string, formValues: linkItem) {
 		const itemsRef = firebase.database().ref(type);
 		itemsRef.push({...formValues});
@@ -79,6 +103,7 @@ class App extends React.Component<Props, State> {
 
 	componentDidMount() {
 		this.getLinks();
+		this.getCategories();
 	}
 
   render() {
@@ -96,6 +121,7 @@ class App extends React.Component<Props, State> {
           </div>
           <div className="col third">
             <LinkForm
+            	categories={this.state.categories}
             	handleFormSubmit={this.handleFormSubmit.bind(null, this.Columns.link)} />
           </div>
           <div className="col third">
