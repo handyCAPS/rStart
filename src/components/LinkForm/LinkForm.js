@@ -44,9 +44,13 @@ class LinkForm extends React.Component<Props, State> {
 				type: 'select',
 				children: props.categories,
 				value: '',
-				attributes: {
-					required: true
-				},
+				errors: []
+			},
+			{
+				id: 'excludefrombestof',
+				label: 'Exclude from bestof',
+				type: 'checkbox',
+				value: false,
 				errors: []
 			}
 		];
@@ -67,7 +71,7 @@ class LinkForm extends React.Component<Props, State> {
 	componentWillReceiveProps(nextProps) {
 	    if(nextProps.categories.length > 0) {
 	    	this.setState({inputArray: this.state.inputArray.reduce((p,c) => {
-	    		if (c.hasOwnProperty('children')) {
+	    		if (c.hasOwnProperty('children') && c.id === 'category') {
 	    			c.children = this.catsToOptionsArray(nextProps.categories);
 	    		}
 	    		p.push(c);

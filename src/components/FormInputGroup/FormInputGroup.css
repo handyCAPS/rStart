@@ -14,12 +14,17 @@
   display: inline-block;
   width: 30%;
   text-align: right;
+  text-transform: capitalize;
 }
 
 .Form__input {
   width: calc(70%);
   border: none;
   border-bottom: 2px solid black;
+}
+
+.Form__input:invalid {
+	box-shadow: initial;
 }
 
 .Form__input__errors {

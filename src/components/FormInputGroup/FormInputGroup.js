@@ -2,6 +2,7 @@
 import React from 'react';
 
 import Select from '../Select/Select';
+import Checkbox from '../Checkbox/Checkbox';
 
 import './FormInputGroup.css';
 
@@ -25,12 +26,16 @@ type State = {};
 
 class FormInputGroup extends React.Component<Props, State> {
 
+	// shouldBeType: Function;
+
 	handleChange: Function;
+	handleCheckboxChange: Function;
 
 	constructor() {
 		super();
 
 		this.handleChange = this.handleChange.bind(this);
+		this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
 	}
 
 	getClassList(type: string) {
@@ -44,8 +49,23 @@ class FormInputGroup extends React.Component<Props, State> {
 		return classLists[type].join(' ');
 	}
 
+	// shouldBeType(type: string): boolean {
+	// 	const allTypes = [
+	// 		'text',
+	// 		'select',
+	// 		'checkbox'
+	// 	];
+
+	// }
+
 	handleChange(event) {
+		console.log("value:", event.target.value);
 		this.props.handleChange(this.props.index, event.target.value);
+	}
+
+	handleCheckboxChange(checked) {
+		console.log("checked:", checked);
+		this.props.handleChange(this.props.index, checked);
 	}
 
 	render() {
@@ -53,9 +73,14 @@ class FormInputGroup extends React.Component<Props, State> {
 				<p className="FormInputGroup">
 					<label
 							htmlFor={this.props.id}
-							className={this.getClassList('label')}>{this.props.label}
+							className={this.getClassList('label')}>{this.props.label !== undefined ? this.props.label : this.props.id}
 					</label>
-					{ this.props.type === 'select' &&
+					{ this.props.type === 'checkbox' &&
+					<Checkbox
+						id={this.props.id}
+						handleChange={this.handleCheckboxChange}
+						classList={['Form__input', 'Form__input--checkbox']} /> }
+					{ this.props.type === 'select' && this.props.type !== 'checkbox' &&
 					<Select
 						id={this.props.id}
 						classList={({
@@ -64,14 +89,13 @@ class FormInputGroup extends React.Component<Props, State> {
 						})}
 						handleChange={this.handleChange}
 						options={this.props.children} /> }
-					{ this.props.type !== 'select' &&
+					{ ['select', 'checkbox'].indexOf(this.props.type) === -1 &&
 					<input
-							type="text"
+							type={this.props.type !== undefined ? this.props.type : "text"}
 							id={this.props.id}
 							value={this.props.value}
 							onChange={this.handleChange}
 							{...this.props.attributes}
-							// required="true"
 							className={this.getClassList('input')}/> }
 							<span className="Form__input__errors">{this.props.errors.join(' ')}</span>
 				</p>

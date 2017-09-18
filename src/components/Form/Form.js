@@ -25,7 +25,7 @@ type State = {
 
 class Form extends React.Component<Props, State> {
 
-	handleInputChange: Function;
+	handleChange: Function;
 	handleSubmit: Function;
 	getFormValues: Function;
 	checkFormForErrors: Function;
@@ -35,7 +35,7 @@ class Form extends React.Component<Props, State> {
 
 		this.state = {inputs: props.inputArray};
 
-		this.handleInputChange = this.handleInputChange.bind(this);
+		this.handleChange = this.handleChange.bind(this);
 		this.getFormValues = this.getFormValues.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.checkFormForErrors = this.checkFormForErrors.bind(this);
@@ -51,6 +51,7 @@ class Form extends React.Component<Props, State> {
 	checkFormForErrors(): boolean {
 		let noErrors = true;
 		const checkedInputs = this.state.inputs.reduce((prev, cur) => {
+			if (!cur.hasOwnProperty('attributes')) { return prev; }
 			switch (true) {
 				case cur.attributes.required:
 					if (cur.value === '') {
@@ -67,9 +68,9 @@ class Form extends React.Component<Props, State> {
 		return noErrors;
 	}
 
-	handleInputChange(index: number, value: string) {
+	handleChange(index: number, value: string) {
 		this.setState({
-			inputs: this.state.inputs.map((input, i) => {
+			inputs: this.state.inputs.map((input: Input, i) => {
 				if (i === index) {
 					return {
 						...input,
@@ -107,13 +108,8 @@ class Form extends React.Component<Props, State> {
               		<FormInputGroup
               			key={i}
               			index={i}
-              			id={input.id}
-              			label={input.id}
-              			type={input.type}
-              			children={input.children}
-              			errors={input.errors}
-              			handleChange={this.handleInputChange}
-              			value={input.value} />
+              			handleChange={this.handleChange}
+              			{...input} />
               	)) }
             	<p className="Form__buttons"><Button {...submitButtonProps} /></p>
           </fieldset>
