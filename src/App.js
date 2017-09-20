@@ -9,7 +9,7 @@ import Link from './components/Link/Link';
 
 import firebase from './firebase';
 
-import { linkItem } from './types/link.item.type';
+import { linkItem, linkStorageItem } from './types/link.item.type';
 
 type Columns = {
 	link: string;
@@ -31,6 +31,7 @@ class App extends React.Component<Props, State> {
 	handleDelete: Function;
 	getLinks: Function;
 	getCategories: Function;
+	prepareLinkForStorage: Function;
 
 	constructor() {
 		super();
@@ -90,9 +91,22 @@ class App extends React.Component<Props, State> {
 		});
 	}
 
+	prepareLinkForStorage(link: linkItem): linkStorageItem {
+		let storageItem = {
+			dateAdded: Date.now(),
+			clicks: 0,
+			excludeFromBestOf: false,
+			...link,
+			categories: {
+				[link.categories]: true
+			}
+		};
+		return storageItem;
+	}
+
 	handleFormSubmit(type: string, formValues: linkItem) {
 		const itemsRef = firebase.database().ref(type);
-		itemsRef.push({...formValues});
+		itemsRef.push(this.prepareLinkForStorage(formValues));
 	}
 
 	handleDelete(type: string, id: string) {
