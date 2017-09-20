@@ -73,6 +73,7 @@ class LinkForm extends React.Component<Props, State> {
 	    	this.setState({inputArray: this.state.inputArray.reduce((p,c) => {
 	    		if (c.hasOwnProperty('children') && c.id === 'category') {
 	    			c.children = this.catsToOptionsArray(nextProps.categories);
+	    			c.value = nextProps.categories.length > 0 && nextProps.categories[0].hasOwnProperty('id') ? nextProps.categories[0].id : '';
 	    		}
 	    		p.push(c);
 	    		return p;
