@@ -5,6 +5,7 @@ import './App.css';
 
 import LinkForm from './components/LinkForm/LinkForm';
 import CatForm from './components/CatForm/CatForm';
+import LoginForm from './components/LoginForm/LoginForm';
 import Link from './components/Link/Link';
 
 import firebase from './firebase';
@@ -28,6 +29,7 @@ class App extends React.Component<Props, State> {
 	columns: Columns;
 
 	handleFormSubmit: Function;
+	handleLoginSubmit: Function;
 	handleDelete: Function;
 	getLinks: Function;
 	getCategories: Function;
@@ -109,6 +111,10 @@ class App extends React.Component<Props, State> {
 		itemsRef.push(this.prepareLinkForStorage(formValues));
 	}
 
+	handleLoginSubmit(formValues: any) {
+		console.dir('formValues', formValues);
+	}
+
 	handleDelete(type: string, id: string) {
 		firebase.database()
 			.ref(type)
@@ -142,6 +148,7 @@ class App extends React.Component<Props, State> {
           <div className="col third">
           	<CatForm
           		handleFormSubmit={this.handleFormSubmit.bind(null, this.Columns.category)}/>
+          	<LoginForm handleSubmit={this.handleLoginSubmit} />
           </div>
         </div>
       </div>

@@ -59,12 +59,10 @@ class FormInputGroup extends React.Component<Props, State> {
 	// }
 
 	handleChange(event) {
-		console.log("value:", event.target.value);
 		this.props.handleChange(this.props.index, event.target.value);
 	}
 
 	handleCheckboxChange(checked) {
-		console.log("checked:", checked);
 		this.props.handleChange(this.props.index, checked);
 	}
 
