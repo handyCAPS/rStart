@@ -115,6 +115,10 @@ class App extends React.Component<Props, State> {
 		console.dir('formValues', formValues);
 	}
 
+	handleSignupSubmit(formValues: any) {
+		console.dir('formValues', formValues);
+	}
+
 	handleDelete(type: string, id: string) {
 		firebase.database()
 			.ref(type)
@@ -148,7 +152,9 @@ class App extends React.Component<Props, State> {
           <div className="col third">
           	<CatForm
           		handleFormSubmit={this.handleFormSubmit.bind(null, this.Columns.category)}/>
-          	<LoginForm handleSubmit={this.handleLoginSubmit} />
+          	<LoginForm
+          		handleSignupSubmit={this.handleSignupSubmit}
+          		handleLoginSubmit={this.handleLoginSubmit} />
           </div>
         </div>
       </div>
