@@ -108,7 +108,11 @@ class App extends React.Component<Props, State> {
 
 	handleFormSubmit(type: string, formValues: linkItem) {
 		const itemsRef = firebase.database().ref(type);
-		itemsRef.push(this.prepareLinkForStorage(formValues));
+		let values = formValues;
+		if (type === this.Columns.link) {
+			values = this.prepareLinkForStorage(formValues);
+		}
+		itemsRef.push(values);
 	}
 
 	handleLoginSubmit(formValues: any) {
@@ -151,7 +155,7 @@ class App extends React.Component<Props, State> {
           </div>
           <div className="col third">
           	<CatForm
-          		handleFormSubmit={this.handleFormSubmit.bind(null, this.Columns.category)}/>
+          		handleSubmit={this.handleFormSubmit.bind(null, this.Columns.category)}/>
           	<LoginForm
           		handleSignupSubmit={this.handleSignupSubmit}
           		handleLoginSubmit={this.handleLoginSubmit} />
