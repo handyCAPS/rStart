@@ -1,7 +1,6 @@
 // @flow
-import React from 'react';
 
-import Form from '../Form/Form';
+import StartForm from '../StartForm/StartForm';
 
 import { Input } from '../../types/input.type';
 
@@ -14,35 +13,38 @@ type Props = {
 
 type State = {
 	isSignup: boolean;
+	inputArray: Array<Input>;
 };
 
-class LoginForm extends React.Component<Props, State> {
-
-	inputArray: Array<Input>;
+class LoginForm extends StartForm<Props, State> {
 
 	constructor() {
 		super();
-		this.inputArray = [
-			{
-				id: 'name',
-				value: '',
-				attributes: {
-					required: true
-				},
-				errors: []
-			},
-			{
-				id: 'password',
-				type: 'password',
-				value: '',
-				attributes: {
-					required: true
-				},
-				errors: []
-			}
-		];
 
-		this.state = {isSignup: false};
+		this.state = {
+			isSignup: false,
+			inputArray: [
+				{
+					id: 'name',
+					value: '',
+					attributes: {
+						required: true
+					},
+					errors: []
+				},
+				{
+					id: 'password',
+					type: 'password',
+					value: '',
+					attributes: {
+						required: true
+					},
+					errors: []
+				}
+			]
+		};
+
+		this.formName = 'Log In';
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
@@ -56,19 +58,10 @@ class LoginForm extends React.Component<Props, State> {
 	}
 
 	toggleSignup = () => {
-		this.setState({isSignup: !this.state.isSignup});
+		const newIsSignup = !this.state.isSignup;
+		this.setState({isSignup: newIsSignup});
+		this.formName = newIsSignup ? 'Sign Up' : 'Log In';
 	}
-
-  render() {
-  	const header = this.state.isSignup ? 'Sign Up' : 'Log In';
-    return (
-    	<div className="LoginForm">
-    		<h3 className="LoginForm__header">{ header }</h3>
-    		<button type="button" className="LoginForm__signup-toggle" onClick={this.toggleSignup}>Sign Up</button>
-    		<Form handleSubmit={this.handleSubmit} inputArray={this.inputArray} />
-    	</div>
-      );
-  }
 }
 
 export default LoginForm;
