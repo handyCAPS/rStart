@@ -1,7 +1,8 @@
 
 
 .Button {
-	border: none;
+	border: 2px solid black;
+	color:  black;
 	font-size: 1em;
 	padding: 0.618em 1em;
 	background: none;

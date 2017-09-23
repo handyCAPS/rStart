@@ -1,6 +1,6 @@
 
 
-const nameddColors = {
+export const namedColors = {
 	white: '#F7F4F1',
 	lightBlue: '#53B3DF',
 	teal: '#63B7CD',
@@ -8,14 +8,10 @@ const nameddColors = {
 	hardBlue: '#2591E1'
 };
 
-const Colors = {
-	main: '#24C66F',
-	contrast: '#FFA02E',
+export const Colors = {
 	lightShade: namedColors.white,
-	lightAccent: lightBlue,
-	mainBrand: teal,
-	darkAccent: grey,
-	darkShade: hardBlue
+	lightAccent: namedColors.lightBlue,
+	mainBrand: namedColors.teal,
+	darkAccent: namedColors.grey,
+	darkShade: namedColors.hardBlue
 };
-
-export default Colors;

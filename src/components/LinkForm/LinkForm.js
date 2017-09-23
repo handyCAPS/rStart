@@ -5,6 +5,8 @@ import './LinkForm.css';
 
 import Form from '../Form/Form';
 
+import { Colors } from '../../vars/colors';
+
 import { InputOption } from '../../types/input.type';
 
 type Props = {
@@ -83,11 +85,19 @@ class LinkForm extends React.Component<Props, State> {
 	}
 
   render() {
+  	const formStyles = {
+  		submitButton: {
+  			color: Colors.darkShade,
+  			border: '2px solid ' + Colors.darkShade,
+  			borderRadius: '5px'
+  		}
+  	};
     return (
       <div>
       	<Form
-      	inputArray={this.state.inputArray}
-      	handleFormSubmit={this.props.handleFormSubmit} />
+      		styles={formStyles}
+	      	inputArray={this.state.inputArray}
+	      	handleFormSubmit={this.props.handleFormSubmit} />
       </div>
     	);
   }

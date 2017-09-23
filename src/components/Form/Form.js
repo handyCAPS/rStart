@@ -1,5 +1,4 @@
 // @flow
-// @flow
 import React from 'react';
 
 import FormInputGroup from '../FormInputGroup/FormInputGroup';
@@ -7,16 +6,21 @@ import FormInputGroup from '../FormInputGroup/FormInputGroup';
 import './Form.css';
 
 
-import Colors from '../../vars/colors';
-
 import Button from '../Button/Button.js';
 
 import { Input } from '../../types/input.type';
 
 
+type FormStyles = {
+	form?: any;
+	fieldset?: any;
+	submitButton?: any;
+};
+
 type Props = {
 	handleFormSubmit: Function;
 	inputArray: Array<Input>;
+	styles?: FormStyles;
 };
 
 type State = {
@@ -29,6 +33,7 @@ class Form extends React.Component<Props, State> {
 	handleSubmit: Function;
 	getFormValues: Function;
 	checkFormForErrors: Function;
+	getStyles: Function;
 
 	constructor(props) {
 		super(props);
@@ -39,6 +44,7 @@ class Form extends React.Component<Props, State> {
 		this.getFormValues = this.getFormValues.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.checkFormForErrors = this.checkFormForErrors.bind(this);
+		this.getStyles = this.getStyles.bind(this);
 	}
 
 	getFormValues() {
@@ -89,21 +95,22 @@ class Form extends React.Component<Props, State> {
 		this.setState({inputs: this.props.inputArray});
 	}
 
+	getStyles(type: string) {
+		if (!this.props.styles) { return {}; }
+		return this.props.styles[type] ? this.props.styles[type] : {};
+	}
+
   render() {
   	const submitButtonProps = {
   		label: 'Submit',
   		type: 'submit',
   		classNames: ['Form__button', 'Form__button--submit'],
-  		styles: {
-  			color: Colors.main,
-  			border: '2px solid ' + Colors.main,
-  			borderRadius: '5px'
-  		}
+  		styles: this.getStyles('submitButton')
   	};
     return (
-      <div className="Form">
+      <div className="Form" style={this.getStyles('form')}>
         <form onSubmit={this.handleSubmit}>
-          <fieldset className="Form__fieldset">
+          <fieldset className="Form__fieldset" style={this.getStyles('fieldset')}>
               { this.state.inputs.map((input, i) => (
               		<FormInputGroup
               			key={i}
