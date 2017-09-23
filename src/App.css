@@ -25,6 +25,16 @@ a {
 	text-decoration: none;
 }
 
+p {
+	margin: 0;
+	padding: 0;
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+}
+
 .header--main {
 	text-align: center;
 }

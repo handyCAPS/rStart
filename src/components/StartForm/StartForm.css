@@ -1,5 +1,17 @@
 
 
 .StartForm {
+	position: relative;
+	border: 2px solid black;
+	margin-bottom: 1.618em;
+	padding: 2.618em 1em 1em;
+}
 
+.StartForm__header {
+	position: absolute;
+	top: -2em;
+	left: 1em;
+	background-color: #fff;
+	padding: 0.5em 0.75em;
+	border: 2px solid black;
 }

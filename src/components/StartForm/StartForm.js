@@ -57,7 +57,7 @@ class StartForm extends React.Component<Props, State> {
   render() {
     return (
     	<div className="StartForm">
-    		<h3 className="Form__header">{this.formName}</h3>
+    		<h3 className="StartForm__header">{this.formName}</h3>
     		<Form
     			styles={this.getFormStyles()}
     			handleFormSubmit={this.handleSubmit}
