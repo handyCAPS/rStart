@@ -44,8 +44,7 @@ class StartForm extends React.Component<Props, State> {
 		return {
 			submitButton: {
 				color: Colors.darkShade,
-				border: '2px solid ' + Colors.darkShade,
-				borderRadius: '5px'
+				borderColor: Colors.darkShade
 			},
 			...this.addStyles()
 		};
