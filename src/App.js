@@ -19,6 +19,14 @@ type Columns = {
 	category: string;
 };
 
+type CategoryItem = {
+	name: string;
+};
+
+type CategoryStorageItem = CategoryItem & {
+	members: any;
+};
+
 type Props = {};
 
 type State = {
@@ -55,6 +63,7 @@ class App extends React.Component<Props, State> {
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
 		this.getLinks = this.getLinks.bind(this);
 		this.getCategories = this.getCategories.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
 	}
 
 	getLinks() {
@@ -70,7 +79,7 @@ class App extends React.Component<Props, State> {
 					id: item,
 					title: items[item].title,
 					link: items[item].link,
-					category: items[item].category
+					categories: items[item].categories
 				});
 			}
 
@@ -108,13 +117,40 @@ class App extends React.Component<Props, State> {
 		return storageItem;
 	}
 
-	handleFormSubmit(type: string, formValues: linkItem) {
-		const itemsRef = firebase.database().ref(type);
+	prepareCatForStorage(formValues: CategoryItem): CategoryStorageItem {
+		return {
+			...formValues,
+			members: {}
+		};
+	}
+
+	handleFormSubmit(type: string, formValues: linkItem | CategoryItem) {
+
+		const itemsRef = firebase.database().ref(type).push();
+		let lastInsertID = false;
 		let values = formValues;
+
 		if (type === this.Columns.link) {
 			values = this.prepareLinkForStorage(formValues);
+			lastInsertID = itemsRef.key;
 		}
-		itemsRef.push(values);
+
+		if (type === this.Columns.category) {
+			values = this.prepareCatForStorage(formValues);
+		}
+
+		itemsRef.set(values);
+
+		if (lastInsertID !== false) {
+			for (let cat in values.categories) {
+				firebase.database()
+					.ref(this.Columns.category)
+					.child(cat + '/members')
+					.update({
+						[lastInsertID]: true
+					});
+			}
+		}
 	}
 
 	handleLoginSubmit(formValues: any) {
@@ -125,11 +161,20 @@ class App extends React.Component<Props, State> {
 		console.dir(formValues);
 	}
 
-	handleDelete(type: string, id: string) {
+	handleDelete(type: string, id: string, categories?: any) {
 		firebase.database()
 			.ref(type)
 			.child(id)
 			.remove();
+
+		if (type === this.Columns.link) {
+			for (let cat in categories) {
+				firebase.database()
+					.ref(this.Columns.category)
+					.child(cat + '/members/' + id)
+					.remove();
+			}
+		}
 	}
 
 	componentDidMount() {

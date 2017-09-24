@@ -7,7 +7,7 @@ type Props = {
 	id: string;
 	title: string;
 	link: string;
-	category: string;
+	categories: any;
 	handleDelete: Function;
 };
 
@@ -17,7 +17,7 @@ class Link extends React.Component<Props, State> {
   render() {
     return (
     	<div className="Link">
-    		<div className="Link__delete" onClick={this.props.handleDelete.bind(null, this.props.id)}>X</div>
+    		<div className="Link__delete" onClick={this.props.handleDelete.bind(null, this.props.id, this.props.categories)}>X</div>
     		<a href={this.props.link} target="_blank" rel="noopener noreferrer" className="Link__anchor">
     			<div className="Link__body">
     				<h3 className="Link__header">{this.props.title}</h3>
