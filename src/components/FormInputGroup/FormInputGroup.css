@@ -8,6 +8,7 @@
 
 .Form__input, .Form__label {
    padding: 0.25em 0.5em;
+   background-color: inherit;
 }
 
 .Form__label {

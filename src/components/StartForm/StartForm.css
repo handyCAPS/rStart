@@ -2,16 +2,19 @@
 
 .StartForm {
 	position: relative;
-	border: 2px solid black;
 	margin-bottom: 1.618em;
 	padding: 2.618em 1em 1em;
+	border-radius: 6px;
+	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.27);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.27);
 }
 
 .StartForm__header {
 	position: absolute;
-	top: -2em;
+	top: -1em;
 	left: 1em;
 	background-color: #fff;
 	padding: 0.5em 0.75em;
-	border: 2px solid black;
+	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.27);
+	box-shadow: 0 2px 8px rgba(0,0,0,0.27);
 }

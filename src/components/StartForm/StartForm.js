@@ -55,8 +55,11 @@ class StartForm extends React.Component<Props, State> {
 	}
 
   render() {
+  	const divStyle = {
+  		backgroundColor: '#FFFFFF'
+  	};
     return (
-    	<div className="StartForm">
+    	<div className="StartForm" style={divStyle}>
     		<h3 className="StartForm__header">{this.formName}</h3>
     		<Form
     			styles={this.getFormStyles()}

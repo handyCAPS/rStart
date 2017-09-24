@@ -12,6 +12,8 @@ import firebase from './firebase';
 
 import { linkItem, linkStorageItem } from './types/link.item.type';
 
+import { Colors } from './vars/colors';
+
 type Columns = {
 	link: string;
 	category: string;
@@ -116,11 +118,11 @@ class App extends React.Component<Props, State> {
 	}
 
 	handleLoginSubmit(formValues: any) {
-		console.dir('formValues', formValues);
+		console.dir(formValues);
 	}
 
 	handleSignupSubmit(formValues: any) {
-		console.dir('formValues', formValues);
+		console.dir(formValues);
 	}
 
 	handleDelete(type: string, id: string) {
@@ -136,8 +138,11 @@ class App extends React.Component<Props, State> {
 	}
 
   render() {
+  	const bodyStyles = {
+  		backgroundColor: Colors.lightShade
+  	};
     return (
-      <div className="outerWrap">
+      <div className="outerWrap" style={bodyStyles}>
         <h1 className="header--main">RStart</h1>
         <div className="body row">
           <div className="col third">
