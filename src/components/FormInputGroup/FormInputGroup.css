@@ -30,8 +30,8 @@
 
 .Form__input__errors {
 	position: absolute;
-	top:  calc(100% + 0.25em);
-	left:  30%;
+	top: calc(100% + 0.25em);
+	left: 30%;
 	font-size: 0.8em;
 	color: red;
 }

@@ -2,8 +2,8 @@
 
 .StartForm {
 	position: relative;
-	margin-bottom: 1.618em;
-	padding: 2.618em 1em 1em;
+	margin-bottom: 2.618em;
+	padding: 3.618em 1em 1em;
 	border-radius: 6px;
 	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.27);
 	box-shadow: 0 2px 8px rgba(0,0,0,0.27);
@@ -15,6 +15,7 @@
 	left: 1em;
 	background-color: #fff;
 	padding: 0.5em 0.75em;
+	border-radius: 4px;
 	-webkit-box-shadow: 0 2px 8px rgba(0,0,0,0.27);
 	box-shadow: 0 2px 8px rgba(0,0,0,0.27);
 }
