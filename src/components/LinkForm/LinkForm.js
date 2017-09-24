@@ -56,6 +56,8 @@ class LinkForm extends StartForm<Props, State> {
 
 		this.state = { inputArray };
 
+		this.formName = 'Add Link';
+
 	}
 
 	catsToOptionsArray(categories: Array<any>): Array<InputOption> {
