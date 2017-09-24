@@ -156,7 +156,7 @@ class App extends React.Component<Props, State> {
           <div className="col third">
             <LinkForm
             	categories={this.state.categories}
-            	handleFormSubmit={this.handleFormSubmit.bind(null, this.Columns.link)} />
+            	handleSubmit={this.handleFormSubmit.bind(null, this.Columns.link)} />
           </div>
           <div className="col third">
           	<CatForm

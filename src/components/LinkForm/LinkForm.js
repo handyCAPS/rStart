@@ -1,24 +1,20 @@
 // @flow
-import React from 'react';
-
 import './LinkForm.css';
 
-import Form from '../Form/Form';
-
-import { Colors } from '../../vars/colors';
+import StartForm from '../StartForm/StartForm';
 
 import { InputOption } from '../../types/input.type';
 
 type Props = {
 	categories: Array<any>;
-	handleFormSubmit: Function;
+	handleSubmit: Function;
 };
 
 type State = {
 	inputArray: Array<Input>;
 };
 
-class LinkForm extends React.Component<Props, State> {
+class LinkForm extends StartForm<Props, State> {
 
 	catsToOptionsArray: Function;
 
@@ -84,23 +80,6 @@ class LinkForm extends React.Component<Props, State> {
 	    }
 	}
 
-  render() {
-  	const formStyles = {
-  		submitButton: {
-  			color: Colors.darkShade,
-  			border: '2px solid ' + Colors.darkShade,
-  			borderRadius: '5px'
-  		}
-  	};
-    return (
-      <div>
-      	<Form
-      		styles={formStyles}
-	      	inputArray={this.state.inputArray}
-	      	handleFormSubmit={this.props.handleFormSubmit} />
-      </div>
-    	);
-  }
 }
 
 export default LinkForm;
