@@ -5,9 +5,15 @@ import './Select.css';
 
 import { InputSelect } from '../../types/input.type';
 
+type SelectStyles = {
+	select?: any;
+	options?: any;
+};
+
 type SelectClassList = {
 	select: Array<string>;
 	options: Array<string>;
+	styles: SelectStyles;
 };
 
 type Props = InputSelect & {
@@ -39,17 +45,24 @@ class Select extends React.Component<Props, State> {
 		return classList;
 	}
 
+	getStyles(type: string) {
+		if (!this.props.styles) { return {}; }
+		return this.props.styles[type] ? this.props.styles[type] : {};
+	}
+
   render() {
   	const classList = this.getClassList(this.props.classList);
     return (
     	<select
     		name={this.props.id}
+    		style={this.getStyles('select')}
     		id={this.props.id}
     		onChange={this.props.handleChange}
     		className={classList.select.join(' ')}>
     		{this.props.options.map((option, index) => (
     			<option
     				key={index}
+    				style={this.getStyles('options')}
     				className={classList.options.join(' ')}
     				value={option.value}>{option.label !== undefined ? option.label : option.value}</option>
     			))}

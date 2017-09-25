@@ -115,6 +115,7 @@ class Form extends React.Component<Props, State> {
               		<FormInputGroup
               			key={i}
               			index={i}
+              			styles={this.getStyles('inputs')}
               			handleChange={this.handleChange}
               			{...input} />
               	)) }
