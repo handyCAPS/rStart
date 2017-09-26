@@ -1,17 +1,17 @@
 
 
 export const namedColors = {
-	white: '#F7F4F1',
-	lightBlue: '#53B3DF',
-	teal: '#63B7CD',
-	grey: '#7B9ABB',
-	hardBlue: '#2591E1'
+	white: '#F2F4EF',
+	fadedGreen: '#919660',
+	darkPink: '#865B80',
+	fadedBlue: '#7B9ABB',
+	hardBlue: '#3E7082'
 };
 
 export const Colors = {
 	lightShade: namedColors.white,
-	lightAccent: namedColors.lightBlue,
-	mainBrand: namedColors.teal,
-	darkAccent: namedColors.grey,
+	lightAccent: namedColors.fadedGreen,
+	mainBrand: namedColors.fadedBlue,
+	darkAccent: namedColors.darkPink,
 	darkShade: namedColors.hardBlue
 };

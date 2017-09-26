@@ -188,7 +188,6 @@ class App extends React.Component<Props, State> {
   	};
     return (
       <div className="outerWrap" style={bodyStyles}>
-        <h1 className="header--main">RStart</h1>
         <div className="body row">
           <div className="col third">
           	{this.state.links.map((link, i) => (
