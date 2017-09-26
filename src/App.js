@@ -38,6 +38,7 @@ type State = {
 class App extends React.Component<Props, State> {
 
 	columns: Columns;
+	userLoaded: boolean;
 
 	handleFormSubmit: Function;
 	handleLoginSubmit: Function;
@@ -196,6 +197,7 @@ class App extends React.Component<Props, State> {
 	handleAuthChange() {
 		firebase.auth()
 			.onAuthStateChanged(user => {
+				this.userLoaded = true;
 				if (user) {
 					this.setState({user});
 					this.getLinks();
@@ -206,6 +208,10 @@ class App extends React.Component<Props, State> {
 
 	componentDidMount() {
 		this.handleAuthChange();
+	}
+
+	componentWillMount() {
+	    this.userLoaded = false;
 	}
 
   render() {
@@ -233,9 +239,11 @@ class App extends React.Component<Props, State> {
           <div className="col third">
           	<CatForm
           		handleSubmit={this.handleFormSubmit.bind(null, this.Columns.category)}/>
-          	<EnterForm
-          		handleSignupSubmit={this.handleSignupSubmit}
-          		handleLoginSubmit={this.handleLoginSubmit} />
+          	{this.userLoaded && !this.state.user &&
+          		<EnterForm
+	          		handleSignupSubmit={this.handleSignupSubmit}
+	          		handleLoginSubmit={this.handleLoginSubmit} />
+          	}
           </div>
         </div>
       </div>
