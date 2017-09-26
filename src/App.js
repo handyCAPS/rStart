@@ -32,6 +32,7 @@ type Props = {};
 type State = {
 	links: Array<linkItem>;
 	categories: Array<any>;
+	user: any;
 };
 
 class App extends React.Component<Props, State> {
@@ -48,12 +49,11 @@ class App extends React.Component<Props, State> {
 	constructor() {
 		super();
 
-		this.state = (
-			{
+		this.state = {
 				links: [],
-				categories: []
-			}
-		);
+				categories: [],
+				user: false
+			};
 
 		this.Columns = {
 			link: 'link',
@@ -64,10 +64,13 @@ class App extends React.Component<Props, State> {
 		this.getLinks = this.getLinks.bind(this);
 		this.getCategories = this.getCategories.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
+		this.handleAuthChange = this.handleAuthChange.bind(this);
 	}
 
 	getLinks() {
-		const itemsRef = firebase.database().ref(this.Columns.link);
+		const itemsRef = firebase.database()
+			.ref(this.state.user.uid)
+			.child(this.Columns.link);
 
 		itemsRef.on('value', snapshot => {
 
@@ -88,7 +91,11 @@ class App extends React.Component<Props, State> {
 	}
 
 	getCategories() {
-		const catsRef = firebase.database().ref(this.Columns.category);
+
+		const catsRef = firebase.database()
+			.ref(this.state.user.uid)
+			.child(this.Columns.category);
+
 		catsRef.on('value', snapshot => {
 			let items = snapshot.val();
 			let newState = [];
@@ -126,7 +133,7 @@ class App extends React.Component<Props, State> {
 
 	handleFormSubmit(type: string, formValues: linkItem | CategoryItem) {
 
-		const itemsRef = firebase.database().ref(type).push();
+		const itemsRef = firebase.database().ref(this.state.user.uid).child(type).push();
 		let lastInsertID = false;
 		let values = formValues;
 
@@ -144,7 +151,8 @@ class App extends React.Component<Props, State> {
 		if (lastInsertID !== false) {
 			for (let cat in values.categories) {
 				firebase.database()
-					.ref(this.Columns.category)
+					.ref(this.state.user.uid)
+					.child(this.Columns.category)
 					.child(cat + '/members')
 					.update({
 						[lastInsertID]: true
@@ -159,29 +167,45 @@ class App extends React.Component<Props, State> {
 	}
 
 	handleSignupSubmit(formValues: any) {
-		console.log("Sign up");
-		console.dir(formValues);
+		const { email, password } = formValues;
+		firebase.auth()
+			.createUserWithEmailAndPassword(email, password)
+			.catch(error => {
+				console.dir(error);
+			});
 	}
 
 	handleDelete(type: string, id: string, categories?: any) {
 		firebase.database()
-			.ref(type)
+			.ref(this.state.user.uid)
+			.child(type)
 			.child(id)
 			.remove();
 
 		if (type === this.Columns.link) {
 			for (let cat in categories) {
 				firebase.database()
-					.ref(this.Columns.category)
+					.ref(this.state.user.uid)
+					.child(this.Columns.category)
 					.child(cat + '/members/' + id)
 					.remove();
 			}
 		}
 	}
 
+	handleAuthChange() {
+		firebase.auth()
+			.onAuthStateChanged(user => {
+				if (user) {
+					this.setState({user});
+					this.getLinks();
+					this.getCategories();
+				}
+			});
+	}
+
 	componentDidMount() {
-		this.getLinks();
-		this.getCategories();
+		this.handleAuthChange();
 	}
 
   render() {
@@ -200,9 +224,11 @@ class App extends React.Component<Props, State> {
           		))}
           </div>
           <div className="col third">
-            <LinkForm
+            {this.state.categories.length > 0 &&
+            	<LinkForm
             	categories={this.state.categories}
             	handleSubmit={this.handleFormSubmit.bind(null, this.Columns.link)} />
+            }
           </div>
           <div className="col third">
           	<CatForm

@@ -24,7 +24,8 @@ class LoginForm extends StartForm<Props, State> {
 		this.state = {
 			inputArray: [
 				{
-					id: 'name',
+					id: 'email',
+					type: 'email',
 					value: '',
 					attributes: {
 						required: true
