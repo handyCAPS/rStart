@@ -44,7 +44,7 @@ class EnterForm extends React.Component<Props, State> {
 	}
 
 	handleSubmit(formValues: any) {
-		if (this.state.isSingup) {
+		if (this.state.isSignup) {
 			this.props.handleSignupSubmit(formValues);
 		} else {
 			this.props.handleLoginSubmit(formValues);

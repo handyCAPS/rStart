@@ -154,10 +154,12 @@ class App extends React.Component<Props, State> {
 	}
 
 	handleLoginSubmit(formValues: any) {
+		console.log("Log In");
 		console.dir(formValues);
 	}
 
 	handleSignupSubmit(formValues: any) {
+		console.log("Sign up");
 		console.dir(formValues);
 	}
 
