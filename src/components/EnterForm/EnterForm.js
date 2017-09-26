@@ -54,8 +54,9 @@ class EnterForm extends React.Component<Props, State> {
   render() {
   	const buttonClassNames = ['EnterForm__button EnterForm__button--toggle'];
   	const buttonStyles = {
-				borderColor: Colors.lightAccent,
-  			color: Colors.lightAccent,
+				border: 'none',
+  			color: Colors.lightShade,
+  			backgroundColor: Colors.darkShade,
   			fontSize: '0.8em'
   	};
     return (
