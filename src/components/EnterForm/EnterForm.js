@@ -56,8 +56,7 @@ class EnterForm extends React.Component<Props, State> {
   	const buttonStyles = {
 				border: 'none',
   			color: Colors.lightShade,
-  			backgroundColor: Colors.darkShade,
-  			fontSize: '0.8em'
+  			backgroundColor: Colors.darkShade
   	};
     return (
     	<div className="EnterForm">

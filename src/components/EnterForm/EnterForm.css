@@ -7,6 +7,7 @@
 .EnterForm__button--toggle {
 	position: absolute;
 	z-index: 999;
-	right: 1em;
-	top: 0.5em;
+	right: 2.618rem;
+	top: 1em;
+	font-size: 0.85em;
 }
