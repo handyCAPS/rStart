@@ -27,6 +27,13 @@ class CatForm extends StartForm<Props, State> {
 						required: true
 					},
 					errors: []
+				},
+				{
+					id: 'excludeFromBestOf',
+					label: 'Exclude From Bestof',
+					type: 'checkbox',
+					value: '',
+					errors: []
 				}
 		]};
 
