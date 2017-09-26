@@ -43,7 +43,7 @@ class StartForm extends React.Component<Props, State> {
 	getFormStyles() {
 		return {
 			submitButton: {
-				color: Colors.darkShade,
+				color: Colors.darkAccent,
 				borderColor: Colors.darkAccent
 			},
 			inputs: {

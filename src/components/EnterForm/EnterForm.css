@@ -1,0 +1,12 @@
+
+
+.EnterForm {
+	position: relative;
+}
+
+.EnterForm__button--toggle {
+	position: absolute;
+	z-index: 999;
+	right: 1em;
+	top: 0.5em;
+}

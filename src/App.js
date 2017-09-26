@@ -5,7 +5,7 @@ import './App.css';
 
 import LinkForm from './components/LinkForm/LinkForm';
 import CatForm from './components/CatForm/CatForm';
-import LoginForm from './components/LoginForm/LoginForm';
+import EnterForm from './components/EnterForm/EnterForm';
 import Link from './components/Link/Link';
 
 import firebase from './firebase';
@@ -206,7 +206,7 @@ class App extends React.Component<Props, State> {
           <div className="col third">
           	<CatForm
           		handleSubmit={this.handleFormSubmit.bind(null, this.Columns.category)}/>
-          	<LoginForm
+          	<EnterForm
           		handleSignupSubmit={this.handleSignupSubmit}
           		handleLoginSubmit={this.handleLoginSubmit} />
           </div>

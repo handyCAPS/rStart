@@ -7,8 +7,8 @@ import { Input } from '../../types/input.type';
 import './LoginForm.css';
 
 type Props = {
-	handleLoginSubmit: Function;
-	handleSignupSubmit: Function;
+	isSignup: boolean;
+	formName: string;
 };
 
 type State = {
@@ -22,7 +22,6 @@ class LoginForm extends StartForm<Props, State> {
 		super();
 
 		this.state = {
-			isSignup: false,
 			inputArray: [
 				{
 					id: 'name',
@@ -50,17 +49,13 @@ class LoginForm extends StartForm<Props, State> {
 	}
 
 	handleSubmit(formValues: any) {
-		if (this.state.isSingup) {
-			this.props.handleSignupSubmit(formValues);
-		} else {
-			this.props.handleLoginSubmit(formValues);
-		}
+		this.props.handleSubmit(formValues);
 	}
 
-	toggleSignup = () => {
-		const newIsSignup = !this.state.isSignup;
-		this.setState({isSignup: newIsSignup});
-		this.formName = newIsSignup ? 'Sign Up' : 'Log In';
+	componentWillReceiveProps(nextProps) {
+		if (nextProps && nextProps.hasOwnProperty('formName')) {
+			this.formName = nextProps.formName;
+		}
 	}
 }
 
