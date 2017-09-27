@@ -10,9 +10,14 @@ type SelectStyles = {
 	options?: any;
 };
 
+type Option = {
+	value: string;
+	label?: string;
+};
+
 type SelectClassList = {
 	select: Array<string>;
-	options: Array<string>;
+	options: Array<Option>;
 	styles: SelectStyles;
 };
 
@@ -59,7 +64,7 @@ class Select extends React.Component<Props, State> {
     		id={this.props.id}
     		onChange={this.props.handleChange}
     		className={classList.select.join(' ')}>
-    		{this.props.options.map((option, index) => (
+    		{this.props.options.map((option: Option, index: number) => (
     			<option
     				key={index}
     				style={this.getStyles('options')}
