@@ -41,7 +41,7 @@ class LinkForm extends StartForm<Props, State> {
 				id: 'categories',
 				label: 'category',
 				type: 'select',
-				children: props.categories,
+				children: this.catsToOptionsArray(props.categories),
 				value: '',
 				errors: []
 			},
