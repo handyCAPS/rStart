@@ -7,6 +7,7 @@ import LinkForm from './components/LinkForm/LinkForm';
 import CatForm from './components/CatForm/CatForm';
 import EnterForm from './components/EnterForm/EnterForm';
 import Link from './components/Link/Link';
+import LogOut from './components/LogOut/LogOut';
 
 import firebase from './firebase';
 
@@ -46,6 +47,7 @@ class App extends React.Component<Props, State> {
 	getLinks: Function;
 	getCategories: Function;
 	prepareLinkForStorage: Function;
+	handleLogOut: Function;
 
 	constructor() {
 		super();
@@ -66,6 +68,7 @@ class App extends React.Component<Props, State> {
 		this.getCategories = this.getCategories.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
 		this.handleAuthChange = this.handleAuthChange.bind(this);
+		this.handleLogOut = this.handleLogOut.bind(this);
 	}
 
 	getLinks() {
@@ -163,8 +166,12 @@ class App extends React.Component<Props, State> {
 	}
 
 	handleLoginSubmit(formValues: any) {
-		console.log("Log In");
-		console.dir(formValues);
+		const { email, password } = formValues;
+		firebase.auth()
+			.signInWithEmailAndPassword(email, password)
+			.catch(error => {
+				console.dir(error);
+			});
 	}
 
 	handleSignupSubmit(formValues: any) {
@@ -185,10 +192,16 @@ class App extends React.Component<Props, State> {
 
 		if (type === this.Columns.link) {
 			for (let cat in categories) {
+
+				const refString = [
+					this.state.user.uid,
+					this.Columns.category,
+					cat,
+					'members',
+					id].join('/');
+
 				firebase.database()
-					.ref(this.state.user.uid)
-					.child(this.Columns.category)
-					.child(cat + '/members/' + id)
+					.ref(refString)
 					.remove();
 			}
 		}
@@ -197,13 +210,19 @@ class App extends React.Component<Props, State> {
 	handleAuthChange() {
 		firebase.auth()
 			.onAuthStateChanged(user => {
+				this.setState({user});
 				this.userLoaded = true;
 				if (user) {
-					this.setState({user});
 					this.getLinks();
 					this.getCategories();
 				}
 			});
+	}
+
+	handleLogOut() {
+		firebase.auth().signOut()
+			.then()
+			.catch();
 	}
 
 	componentDidMount() {
@@ -221,6 +240,9 @@ class App extends React.Component<Props, State> {
     return (
       <div className="outerWrap" style={bodyStyles}>
         <div className="body row">
+        	{this.state.user !== null &&
+      			<LogOut handleLogOut={this.handleLogOut} />
+        	}
           <div className="col third">
           	{this.state.links.map((link, i) => (
           			<Link
