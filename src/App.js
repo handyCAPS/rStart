@@ -244,7 +244,7 @@ class App extends React.Component<Props, State> {
       			<LogOut handleLogOut={this.handleLogOut} />
         	}
           <div className="col third">
-          	{this.state.links.map((link, i) => (
+          	{this.state.user !== null && this.state.links.map((link, i) => (
           			<Link
           				key={i}
           				{...link}
@@ -252,16 +252,18 @@ class App extends React.Component<Props, State> {
           		))}
           </div>
           <div className="col third">
-            {this.state.categories.length > 0 &&
+            {this.state.user !== null && this.state.categories.length > 0 &&
             	<LinkForm
             	categories={this.state.categories}
             	handleSubmit={this.handleFormSubmit.bind(null, this.Columns.link)} />
             }
           </div>
           <div className="col third">
-          	<CatForm
-          		handleSubmit={this.handleFormSubmit.bind(null, this.Columns.category)}/>
-          	{this.userLoaded && !this.state.user &&
+          	{this.state.user !== null &&
+	          	<CatForm
+	          		handleSubmit={this.handleFormSubmit.bind(null, this.Columns.category)}/>
+        		}
+          	{this.state.user === null && this.userLoaded &&
           		<EnterForm
 	          		handleSignupSubmit={this.handleSignupSubmit}
 	          		handleLoginSubmit={this.handleLoginSubmit} />
