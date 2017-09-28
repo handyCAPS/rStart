@@ -101,6 +101,7 @@ class FormInputGroup extends React.Component<Props, State> {
 						<textarea
 							id={this.props.id}
 							style={this.getStyles('textarea')}
+							onChange={this.handleChange}
 							className={this.getClassList('input')}
 							{...this.props.attributes} >{this.props.value}</textarea>
 					}
