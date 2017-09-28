@@ -46,6 +46,21 @@ class LinkForm extends StartForm<Props, State> {
 				errors: []
 			},
 			{
+				id: 'description',
+				type: 'textarea',
+				value: '',
+				attributes: {
+					rows: 4
+				},
+				errors: []
+			},
+			{
+				id: 'image',
+				type: 'file',
+				value: false,
+				errors: []
+			},
+			{
 				id: 'excludeFromBestOf',
 				label: 'Exclude from bestof',
 				type: 'checkbox',

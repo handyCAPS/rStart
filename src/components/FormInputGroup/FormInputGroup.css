@@ -18,10 +18,19 @@
   text-transform: capitalize;
 }
 
+.Form__label--textarea {
+	vertical-align: top;
+	padding-top: 0;
+}
+
 .Form__input {
   width: calc(70%);
   border: none;
   border-bottom: 2px solid black;
+}
+
+.Form__input--textarea {
+	border-right: 2px solid black;
 }
 
 .Form__input:invalid {

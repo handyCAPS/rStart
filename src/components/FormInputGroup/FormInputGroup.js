@@ -27,8 +27,6 @@ type State = {};
 
 class FormInputGroup extends React.Component<Props, State> {
 
-	// shouldBeType: Function;
-
 	handleChange: Function;
 	handleCheckboxChange: Function;
 	getStyles: Function;
@@ -42,24 +40,16 @@ class FormInputGroup extends React.Component<Props, State> {
 	}
 
 	getClassList(type: string) {
+		const inputType = this.props.type ? this.props.type : 'text';
 		const labelClasses = this.props.labelClasses ? this.props.labelClasses : [];
 		const inputClasses = this.props.inputClasses ? this.props.inputClasses : [];
 		const classLists = {
-			label: ['Form__label', ...labelClasses],
-			input: ['Form__input', ...inputClasses]
+			label: ['Form__label', 'Form__label--' + inputType, ...labelClasses],
+			input: ['Form__input', 'Form__input--' + inputType, ...inputClasses]
 		};
 
 		return classLists[type].join(' ');
 	}
-
-	// shouldBeType(type: string): boolean {
-	// 	const allTypes = [
-	// 		'text',
-	// 		'select',
-	// 		'checkbox'
-	// 	];
-
-	// }
 
 	handleChange(event) {
 		this.props.handleChange(this.props.index, event.target.value);
@@ -96,17 +86,25 @@ class FormInputGroup extends React.Component<Props, State> {
 						style={this.getStyles('checkbox')}
 						handleChange={this.handleCheckboxChange}
 						classList={['Form__input', 'Form__input--checkbox']} /> }
-					{ this.props.type === 'select' && this.props.type !== 'checkbox' &&
+					{ this.props.type === 'select' &&
 					<Select
 						id={this.props.id}
 						styles={this.getStyles('select')}
 						classList={({
-							select: ['Form__input', 'Form__input--select'],
+							select: ['Form__input', 'Form__input--select', ...this.getClassList('input')],
 							options: ['Form__option']
+
 						})}
 						handleChange={this.handleChange}
 						options={this.props.children} /> }
-					{ ['select', 'checkbox'].indexOf(this.props.type) === -1 &&
+					{ this.props.type === 'textarea' &&
+						<textarea
+							id={this.props.id}
+							style={this.getStyles('textarea')}
+							className={this.getClassList('input')}
+							{...this.props.attributes} >{this.props.value}</textarea>
+					}
+					{ ['select', 'checkbox', 'textarea'].indexOf(this.props.type) === -1 &&
 					<input
 							type={inputType}
 							style={this.getStyles(inputType)}
