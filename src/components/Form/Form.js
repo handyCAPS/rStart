@@ -74,9 +74,9 @@ class Form extends React.Component<Props, State> {
 		return noErrors;
 	}
 
-	handleChange(index: number, value: string) {
+	handleChange(index: number, value: string | Array<any>) {
 		this.setState({
-			inputs: this.state.inputs.map((input: Input, i) => {
+			inputs: this.state.inputs.map((input: Input, i: number) => {
 				if (i === index) {
 					return {
 						...input,

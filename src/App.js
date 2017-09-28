@@ -47,6 +47,7 @@ class App extends React.Component<Props, State> {
 	getLinks: Function;
 	getCategories: Function;
 	prepareLinkForStorage: Function;
+	handleImageUpload: Function;
 	handleLogOut: Function;
 
 	constructor() {
@@ -64,6 +65,7 @@ class App extends React.Component<Props, State> {
 		};
 
 		this.handleFormSubmit = this.handleFormSubmit.bind(this);
+		this.handleImageUpload = this.handleImageUpload.bind(this);
 		this.getLinks = this.getLinks.bind(this);
 		this.getCategories = this.getCategories.bind(this);
 		this.handleDelete = this.handleDelete.bind(this);
@@ -86,7 +88,7 @@ class App extends React.Component<Props, State> {
 					id: item,
 					title: items[item].title,
 					link: items[item].link,
-					categories: items[item].categories
+					categories: Object.keys(items[item].categories)
 				});
 			}
 
@@ -136,33 +138,43 @@ class App extends React.Component<Props, State> {
 	}
 
 	handleFormSubmit(type: string, formValues: linkItem | CategoryItem) {
-
-		const itemsRef = firebase.database().ref(this.state.user.uid).child(type).push();
+		const refString = [this.state.user.uid, type].join('/');
+		const itemsRef = firebase.database().ref(refString).push();
 		let lastInsertID = false;
 		let values = formValues;
 
 		if (type === this.Columns.link) {
 			values = this.prepareLinkForStorage(formValues);
 			lastInsertID = itemsRef.key;
+			if (values.image !== false) {
+				this.handleImageUpload(values.image, lastInsertID);
+				values = {...values, image: false};
+			}
 		}
 
 		if (type === this.Columns.category) {
 			values = this.prepareCatForStorage(formValues);
 		}
-
+console.log("refString:", refString);
+console.dir(values);
+console.dir(itemsRef);
 		itemsRef.set(values);
 
 		if (lastInsertID !== false) {
 			for (let cat in values.categories) {
 				firebase.database()
 					.ref(this.state.user.uid)
-					.child(this.Columns.category)
-					.child(cat + '/members')
+					.child(this.Columns.category + '/' + cat + '/members')
 					.update({
 						[lastInsertID]: true
 					});
 			}
 		}
+	}
+
+	handleImageUpload(files: Array, linkId: string) {
+		console.log("id:", linkId);
+		console.dir(files);
 	}
 
 	handleLoginSubmit(formValues: any) {
@@ -211,7 +223,6 @@ class App extends React.Component<Props, State> {
 		firebase.auth()
 			.onAuthStateChanged(user => {
 				this.setState({user});
-				this.userLoaded = true;
 				if (user) {
 					this.getLinks();
 					this.getCategories();
@@ -227,6 +238,7 @@ class App extends React.Component<Props, State> {
 
 	componentDidMount() {
 		this.handleAuthChange();
+				this.userLoaded = true;
 	}
 
 	componentWillMount() {

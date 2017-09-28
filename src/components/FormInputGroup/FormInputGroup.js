@@ -16,6 +16,7 @@ type Props = {
 		children?: Array<any>;
 		value?: string;
 		attributes?: any;
+		files?: any;
 		styles?: any;
 		labelClasses?: Array<string>;
 		inputClasses?: Array<string>;
@@ -52,7 +53,11 @@ class FormInputGroup extends React.Component<Props, State> {
 	}
 
 	handleChange(event) {
-		this.props.handleChange(this.props.index, event.target.value);
+		let value = event.target.value;
+		if (this.props.type === 'file') {
+			value = event.target.files ? event.target.files : [];
+		}
+		this.props.handleChange(this.props.index, value);
 	}
 
 	handleCheckboxChange(checked) {
@@ -103,7 +108,8 @@ class FormInputGroup extends React.Component<Props, State> {
 							style={this.getStyles('textarea')}
 							onChange={this.handleChange}
 							className={this.getClassList('input')}
-							{...this.props.attributes} >{this.props.value}</textarea>
+							value={this.props.value}
+							{...this.props.attributes} ></textarea>
 					}
 					{ ['select', 'checkbox', 'textarea'].indexOf(this.props.type) === -1 &&
 					<input

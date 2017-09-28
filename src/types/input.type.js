@@ -3,7 +3,7 @@ export type Input = {
 	label?: string;
 	type?: string;
 	children?: Array<any>;
-	value: string | boolean;
+	value: string | boolean | Array<any>;
 	errors: Array;
 	attributes?: any;
 };

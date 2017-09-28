@@ -20,6 +20,7 @@ class LinkForm extends StartForm<Props, State> {
 
 	constructor(props) {
 		super(props);
+		const categories = this.catsToOptionsArray(props.categories);
 		const inputArray = [
 			{
 				id: 'title',
@@ -41,8 +42,8 @@ class LinkForm extends StartForm<Props, State> {
 				id: 'categories',
 				label: 'category',
 				type: 'select',
-				children: this.catsToOptionsArray(props.categories),
-				value: '',
+				children: categories,
+				value: categories[0].value,
 				errors: []
 			},
 			{
@@ -57,6 +58,7 @@ class LinkForm extends StartForm<Props, State> {
 			{
 				id: 'image',
 				type: 'file',
+				files: false,
 				value: false,
 				errors: []
 			},
