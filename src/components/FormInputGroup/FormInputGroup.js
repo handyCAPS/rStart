@@ -116,9 +116,9 @@ class FormInputGroup extends React.Component<Props, State> {
 							type={inputType}
 							style={this.getStyles(inputType)}
 							id={this.props.id}
-							value={this.props.value}
 							onChange={this.handleChange}
 							{...this.props.attributes}
+							value={this.props.type === 'file' ? '' : this.props.value}
 							className={this.getClassList('input')}/> }
 							<span className="Form__input__errors">{this.props.errors.join(' ')}</span>
 				</p>
