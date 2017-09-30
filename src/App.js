@@ -252,6 +252,9 @@ class App extends React.Component<Props, State> {
   		anchor: {
   			color: Colors.lightShade
   		},
+  		header: {
+  			color: Colors.lightShade
+  		},
   		body: {
   			backgroundColor: Colors.darkAccent
   		}

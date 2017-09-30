@@ -21,8 +21,6 @@
 .Form__label--textarea {
 	vertical-align: top;
 	padding-top: 0;
-	position: relative;
-	top: -2px;
 }
 
 .Form__input {
