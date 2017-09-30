@@ -43,23 +43,23 @@ class StartForm extends React.Component<Props, State> {
 	getFormStyles() {
 		return {
 			submitButton: {
-				color: Colors.mainBrand,
-				borderColor: Colors.mainBrand
+				color: Colors.darkShade,
+				borderColor: Colors.darkShade
 			},
 			inputs: {
 				all: {
-					color: Colors.mainBrand,
-					borderColor: Colors.mainBrand
+					color: Colors.darkShade,
+					borderColor: Colors.darkShade
 				},
 				label: {
-					color: Colors.mainBrand
+					color: Colors.darkShade
 				},
 				select: {
 					options: {
-						borderColor: Colors.mainBrand
+						borderColor: Colors.darkShade
 					},
 					select: {
-						borderColor: Colors.mainBrand
+						borderColor: Colors.darkShade
 					}
 				}
 			},
@@ -76,7 +76,7 @@ class StartForm extends React.Component<Props, State> {
   		backgroundColor: '#FFFFFF'
   	};
   	const headerStyle = {
-  		color: Colors.mainBrand
+  		color: Colors.darkShade
   	};
     return (
     	<div className="StartForm" style={divStyle}>

@@ -88,6 +88,7 @@ class App extends React.Component<Props, State> {
 					id: item,
 					title: items[item].title,
 					link: items[item].link,
+					description: items[item].description,
 					categories: Object.keys(items[item].categories)
 				});
 			}
@@ -155,9 +156,7 @@ class App extends React.Component<Props, State> {
 		if (type === this.Columns.category) {
 			values = this.prepareCatForStorage(formValues);
 		}
-console.log("refString:", refString);
-console.dir(values);
-console.dir(itemsRef);
+
 		itemsRef.set(values);
 
 		if (lastInsertID !== false) {
@@ -249,6 +248,14 @@ console.dir(itemsRef);
   	const bodyStyles = {
   		backgroundColor: Colors.lightShade
   	};
+  	const linkStyles = {
+  		anchor: {
+  			color: Colors.lightShade
+  		},
+  		body: {
+  			backgroundColor: Colors.darkAccent
+  		}
+  	};
     return (
       <div className="outerWrap" style={bodyStyles}>
         <div className="body row">
@@ -259,6 +266,7 @@ console.dir(itemsRef);
           	{this.state.user !== null && this.state.links.map((link, i) => (
           			<Link
           				key={i}
+          				styles={linkStyles}
           				{...link}
             			handleDelete={this.handleDelete.bind(null, this.Columns.link)} />
           		))}

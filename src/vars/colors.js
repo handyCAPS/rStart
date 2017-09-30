@@ -1,17 +1,8 @@
 
-
-export const namedColors = {
-	white: '#F2F4EF',
-	fadedGreen: '#919660',
-	darkPink: '#865B80',
-	fadedBlue: '#7B9ABB',
-	hardBlue: '#3E7082'
-};
-
 export const Colors = {
-	lightShade: namedColors.white,
-	lightAccent: namedColors.fadedGreen,
-	mainBrand: namedColors.fadedBlue,
-	darkAccent: namedColors.darkPink,
-	darkShade: namedColors.hardBlue
+	lightShade: '#F9F8F8',
+	lightAccent: '#84CCDC',
+	mainBrand: '#3BC9E2',
+	darkAccent: '#869CA9',
+	darkShade: '#357DA9'
 };

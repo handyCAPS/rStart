@@ -1,13 +1,14 @@
-export type linkItem = {
+export type LinkItem = {
 	id?: string;
 	title: string;
 	link: string;
-	categories: any;
+	categories: Array<any>;
+	description: string;
 	excludeFromBestOf: boolean;
 	imgLocation?: string;
 };
 
-export type linkStorageItem = linkItem & {
+export type LinkStorageItem = LinkItem & {
 	dateAdded: string;
 	dateAltered?: string;
 	clicks: number;
