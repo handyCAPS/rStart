@@ -20,7 +20,7 @@ class Link extends React.Component<Props, State> {
   render() {
     return (
     	<div className="Link" style={this.getStyles('parent')}>
-    		<div className="Link__delete" onClick={this.props.handleDelete.bind(null, this.props.id, this.props.categories)}>X</div>
+    		<div className="Link__delete" onClick={this.props.handleDelete.bind(null, this.props.id, this.props.categories)}>⊗</div>
     		<a href={this.props.link} style={this.getStyles('anchor')} target="_blank" rel="noopener noreferrer" className="Link__anchor">
     			<div className="Link__body" style={this.getStyles('body')}>
     				<h3 className="Link__header" style={this.getStyles('header')}>{this.props.title}</h3>
