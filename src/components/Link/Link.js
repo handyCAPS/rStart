@@ -23,7 +23,12 @@ class Link extends React.Component<Props, State> {
     		<div className="Link__delete" onClick={this.props.handleDelete.bind(null, this.props.id, this.props.categories)}>⊗</div>
     		<a href={this.props.link} style={this.getStyles('anchor')} target="_blank" rel="noopener noreferrer" className="Link__anchor">
     			<div className="Link__body" style={this.getStyles('body')}>
-    				<h3 className="Link__header" style={this.getStyles('header')}>{this.props.title}</h3>
+    				<figure className="Link__figure">
+    					<img src="http://placecage.com/400/400" alt="" className="Link__img"/>
+    					<figcaption className="Link__title" style={this.getStyles('header')}>
+    						{this.props.title}
+  						</figcaption>
+    				</figure>
     				<p className="Link__text" style={this.getStyles('text')}>
     					{ this.props.description }
     				</p>
