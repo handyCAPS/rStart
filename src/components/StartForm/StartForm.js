@@ -84,7 +84,11 @@ class StartForm extends React.Component<Props, State> {
     		<Form
     			styles={this.getFormStyles()}
     			handleFormSubmit={this.handleSubmit}
-    			inputArray={this.state.inputArray} />
+    			inputArray={this.state.inputArray}>
+    			{this.props.children !== false &&
+    				this.props.children
+    			}
+  			</Form>
     	</div>
       );
   }

@@ -118,7 +118,11 @@ class Form extends React.Component<Props, State> {
               			styles={this.getStyles('inputs')}
               			handleChange={this.handleChange}
               			{...input} />
-              	)) }
+              	))
+            	}
+            	{this.props.children !== false &&
+          			<p className="FormInputGroup Form__children">{this.props.children}</p>
+            	}
             	<p className="Form__buttons"><Button {...submitButtonProps} /></p>
           </fieldset>
         </form>

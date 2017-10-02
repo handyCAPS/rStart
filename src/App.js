@@ -8,6 +8,7 @@ import CatForm from './components/CatForm/CatForm';
 import EnterForm from './components/EnterForm/EnterForm';
 import Link from './components/Link/Link';
 import LogOut from './components/LogOut/LogOut';
+import Button from './components/Button/Button';
 
 import firebase from './firebase';
 
@@ -278,7 +279,9 @@ class App extends React.Component<Props, State> {
             {this.state.user !== null && this.state.categories.length > 0 &&
             	<LinkForm
             	categories={this.state.categories}
-            	handleSubmit={this.handleFormSubmit.bind(null, this.Columns.link)} />
+            	handleSubmit={this.handleFormSubmit.bind(null, this.Columns.link)}>
+            	<Button label="Image" />
+            	</LinkForm>
             }
           </div>
           <div className="col third">

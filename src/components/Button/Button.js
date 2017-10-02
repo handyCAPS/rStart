@@ -14,15 +14,15 @@ type Props = {
 const Button = ({
 	label,
 	handleClick,
-	type,
-	classNames,
-	styles
+	type = 'button',
+	classNames = [],
+	styles = {}
 	}: Props) => (
 		<button
 			onClick={handleClick}
 			className={['Button ', ...classNames].join(' ')}
-			style={styles ? styles : {}}
-			type={type ? type : 'button'}>
+			style={styles}
+			type={type}>
 			{label}
 			</button>
 	);
