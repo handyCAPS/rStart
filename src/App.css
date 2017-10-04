@@ -48,8 +48,14 @@ fieldset {
 	text-align: center;
 }
 
+.body {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 1.618rem;
+	padding: 1.618rem;
+}
+
 .outerWrap {
-	padding-top: 1em;
 	min-height: 100vh;
 }
 
@@ -60,8 +66,15 @@ fieldset {
 }
 
 .third {
-	min-height: 1px;
+	/* min-height: 1px;
 	float: left;
 	width: calc(100% / 3);
-	padding: 1rem;
+	padding: 1rem; */
+}
+
+.links {
+	display: flex;
+	flex-flow: wrap row;
+	justify-content: space-between;
+	align-content: flex-start;
 }

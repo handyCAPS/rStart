@@ -275,7 +275,7 @@ class App extends React.Component<Props, State> {
           {this.state.user !== null && (
             <LogOut handleLogOut={this.handleLogOut} />
           )}
-          <div className="col third">
+          <div className="col third links">
             {this.state.user !== null &&
               this.state.links.map((link, i) => (
                 <Link
