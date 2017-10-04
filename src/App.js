@@ -9,6 +9,7 @@ import EnterForm from "./components/EnterForm/EnterForm";
 import Link from "./components/Link/Link";
 import LogOut from "./components/LogOut/LogOut";
 import Button from "./components/Button/Button";
+import ImageForm from "./components/ImageForm/ImageForm";
 
 import firebase from "./firebase";
 
@@ -49,7 +50,8 @@ class App extends React.Component<Props, State> {
   prepareLinkForStorage: Function;
   handleImageUpload: Function;
   handleAuthChange: Function;
-  handleLogOut: Function;
+	handleLogOut: Function;
+	handleImageFormSubmit: Function;
 
   constructor() {
     super();
@@ -71,7 +73,8 @@ class App extends React.Component<Props, State> {
     this.getCategories     = this.getCategories.bind(this);
     this.handleDelete      = this.handleDelete.bind(this);
     this.handleAuthChange  = this.handleAuthChange.bind(this);
-    this.handleLogOut      = this.handleLogOut.bind(this);
+		this.handleLogOut      = this.handleLogOut.bind(this);
+		this.handleImageFormSubmit = this.handleImageFormSubmit.bind(this);
   }
 
   getLinks() {
@@ -179,7 +182,11 @@ class App extends React.Component<Props, State> {
   handleImageUpload(files: Array<any>, linkId: string) {
     console.log("id:", linkId);
     console.dir(files);
-  }
+	}
+
+	handleImageFormSubmit(formValues: any) {
+		console.dir(formValues);
+	}
 
   handleLoginSubmit(formValues: any) {
     const { email, password } = formValues;
@@ -302,12 +309,15 @@ class App extends React.Component<Props, State> {
           </div>
           <div className="col third">
             {this.state.user !== null && (
-              <CatForm
+              <div>
+							<CatForm
                 handleSubmit={this.handleFormSubmit.bind(
                   null,
                   this.Columns.category
                 )}
               />
+							<ImageForm handleSubmit={this.handleImageFormSubmit} />
+							</div>
             )}
             {this.state.user === null &&
               this.userLoaded && (
