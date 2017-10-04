@@ -13,7 +13,7 @@ type State = {
 	inputArray: Array<Input>;
 };
 
-class CatForm extends StartForm<Props, State> {
+class CatForm extends StartForm {
 
 	constructor() {
 		super();

@@ -3,7 +3,7 @@ import './LinkForm.css';
 
 import StartForm from '../StartForm/StartForm';
 
-import { InputOption } from '../../types/input.type';
+import { Input, InputOption } from '../../types/input.type';
 
 type Props = {
 	categories: Array<any>;
@@ -14,12 +14,12 @@ type State = {
 	inputArray: Array<Input>;
 };
 
-class LinkForm extends StartForm<Props, State> {
+class LinkForm extends StartForm {
 
 	catsToOptionsArray: Function;
 
-	constructor(props) {
-		super(props);
+	constructor(props: Props) {
+		super();
 		const categories = this.catsToOptionsArray(props.categories);
 		const inputArray = [
 			{
@@ -86,7 +86,7 @@ class LinkForm extends StartForm<Props, State> {
 		));
 	}
 
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps(nextProps: Props) {
 	    if(nextProps.categories.length > 0) {
 	    	this.setState({inputArray: this.state.inputArray.reduce((p,c) => {
 	    		if (c.hasOwnProperty('children') && c.id === 'categories') {
