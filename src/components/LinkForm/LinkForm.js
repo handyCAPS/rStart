@@ -26,7 +26,8 @@ class LinkForm extends StartForm {
 				id: 'title',
 				value: '',
 				attributes: {
-					required: true
+					required: true,
+					autoFocus: true
 				},
 				errors: []
 			},
