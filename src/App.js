@@ -39,7 +39,7 @@ type State = {
 
 class App extends React.Component<Props, State> {
 
-	columns: Columns;
+	Columns: Columns;
 	userLoaded: boolean;
 
 	handleFormSubmit: Function;
@@ -49,6 +49,7 @@ class App extends React.Component<Props, State> {
 	getCategories: Function;
 	prepareLinkForStorage: Function;
 	handleImageUpload: Function;
+	handleAuthChange: Function;
 	handleLogOut: Function;
 
 	constructor() {
@@ -172,7 +173,7 @@ class App extends React.Component<Props, State> {
 		}
 	}
 
-	handleImageUpload(files: Array, linkId: string) {
+	handleImageUpload(files: Array<any>, linkId: string) {
 		console.log("id:", linkId);
 		console.dir(files);
 	}
