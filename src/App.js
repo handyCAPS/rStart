@@ -1,21 +1,21 @@
 // @flow
-import React from "react";
+import React from 'react';
 
-import "./App.css";
+import './App.css';
 
-import LinkForm from "./components/LinkForm/LinkForm";
-import CatForm from "./components/CatForm/CatForm";
-import EnterForm from "./components/EnterForm/EnterForm";
-import Link from "./components/Link/Link";
-import LogOut from "./components/LogOut/LogOut";
-import Button from "./components/Button/Button";
-import ImageForm from "./components/ImageForm/ImageForm";
+import LinkForm from './components/LinkForm/LinkForm';
+import CatForm from './components/CatForm/CatForm';
+import EnterForm from './components/EnterForm/EnterForm';
+import Link from './components/Link/Link';
+import LogOut from './components/LogOut/LogOut';
+import Button from './components/Button/Button';
+import ImageForm from './components/ImageForm/ImageForm';
 
-import firebase from "./firebase";
+import firebase from './firebase';
 
-import { linkItem, linkStorageItem } from "./types/link.item.type";
+import { linkItem, linkStorageItem } from './types/link.item.type';
 
-import { Colors } from "./vars/colors";
+import { Colors } from './vars/colors';
 
 type Columns = {
   link: string,
@@ -50,8 +50,8 @@ class App extends React.Component<Props, State> {
   prepareLinkForStorage: Function;
   handleImageUpload: Function;
   handleAuthChange: Function;
-	handleLogOut: Function;
-	handleImageFormSubmit: Function;
+  handleLogOut: Function;
+  handleImageFormSubmit: Function;
 
   constructor() {
     super();
@@ -63,18 +63,18 @@ class App extends React.Component<Props, State> {
     };
 
     this.Columns = {
-      link: "link",
-      category: "category"
+      link: 'link',
+      category: 'category'
     };
 
-    this.handleFormSubmit  = this.handleFormSubmit.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
-    this.getLinks          = this.getLinks.bind(this);
-    this.getCategories     = this.getCategories.bind(this);
-    this.handleDelete      = this.handleDelete.bind(this);
-    this.handleAuthChange  = this.handleAuthChange.bind(this);
-		this.handleLogOut      = this.handleLogOut.bind(this);
-		this.handleImageFormSubmit = this.handleImageFormSubmit.bind(this);
+    this.getLinks = this.getLinks.bind(this);
+    this.getCategories = this.getCategories.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleAuthChange = this.handleAuthChange.bind(this);
+    this.handleLogOut = this.handleLogOut.bind(this);
+    this.handleImageFormSubmit = this.handleImageFormSubmit.bind(this);
   }
 
   getLinks() {
@@ -83,7 +83,7 @@ class App extends React.Component<Props, State> {
       .ref(this.state.user.uid)
       .child(this.Columns.link);
 
-    itemsRef.on("value", snapshot => {
+    itemsRef.on('value', snapshot => {
       let items = snapshot.val();
       let newState = [];
 
@@ -107,7 +107,7 @@ class App extends React.Component<Props, State> {
       .ref(this.state.user.uid)
       .child(this.Columns.category);
 
-    catsRef.on("value", snapshot => {
+    catsRef.on('value', snapshot => {
       let items = snapshot.val();
       let newState = [];
 
@@ -143,13 +143,13 @@ class App extends React.Component<Props, State> {
   }
 
   handleFormSubmit(type: string, formValues: linkItem | CategoryItem) {
-    const refString = [this.state.user.uid, type].join("/");
+    const refString = [this.state.user.uid, type].join('/');
     const itemsRef = firebase
       .database()
       .ref(refString)
       .push();
     let lastInsertID = false;
-    let values = {...formValues};
+    let values = { ...formValues };
 
     if (type === this.Columns.link) {
       values = this.prepareLinkForStorage(formValues);
@@ -171,7 +171,7 @@ class App extends React.Component<Props, State> {
         firebase
           .database()
           .ref(this.state.user.uid)
-          .child(this.Columns.category + "/" + cat + "/members")
+          .child(this.Columns.category + '/' + cat + '/members')
           .update({
             [lastInsertID]: true
           });
@@ -180,13 +180,13 @@ class App extends React.Component<Props, State> {
   }
 
   handleImageUpload(files: Array<any>, linkId: string) {
-    console.log("id:", linkId);
+    console.log('id:', linkId);
     console.dir(files);
-	}
+  }
 
-	handleImageFormSubmit(formValues: any) {
-		console.dir(formValues);
-	}
+  handleImageFormSubmit(formValues: any) {
+    console.dir(formValues);
+  }
 
   handleLoginSubmit(formValues: any) {
     const { email, password } = formValues;
@@ -222,9 +222,9 @@ class App extends React.Component<Props, State> {
           this.state.user.uid,
           this.Columns.category,
           cat,
-          "members",
+          'members',
           id
-        ].join("/");
+        ].join('/');
 
         firebase
           .database()
@@ -301,12 +301,11 @@ class App extends React.Component<Props, State> {
                   handleSubmit={this.handleFormSubmit.bind(
                     null,
                     this.Columns.link
-                  )}
-                >
+                  )}>
                   <Button label="Image" />
                 </LinkForm>
               )}
-							{this.state.user === null &&
+            {this.state.user === null &&
               this.userLoaded && (
                 <EnterForm
                   handleSignupSubmit={this.handleSignupSubmit}
@@ -317,14 +316,14 @@ class App extends React.Component<Props, State> {
           <div className="col third">
             {this.state.user !== null && (
               <div>
-							<CatForm
-                handleSubmit={this.handleFormSubmit.bind(
-                  null,
-                  this.Columns.category
-                )}
-              />
-							<ImageForm handleSubmit={this.handleImageFormSubmit} />
-							</div>
+                <CatForm
+                  handleSubmit={this.handleFormSubmit.bind(
+                    null,
+                    this.Columns.category
+                  )}
+                />
+                <ImageForm handleSubmit={this.handleImageFormSubmit} />
+              </div>
             )}
           </div>
         </div>

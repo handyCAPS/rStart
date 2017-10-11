@@ -1,9 +1,9 @@
 // @flow
-import "./LinkForm.css";
+import './LinkForm.css';
 
-import StartForm from "../StartForm/StartForm";
+import StartForm from '../StartForm/StartForm';
 
-import { Input, InputOption } from "../../types/input.type";
+import { Input, InputOption } from '../../types/input.type';
 
 type Props = {
   categories: Array<any>,
@@ -24,8 +24,8 @@ class LinkForm extends StartForm {
     const categories = this.catsToOptionsArray(props.categories);
     const inputArray = [
       {
-        id: "title",
-        value: "",
+        id: 'title',
+        value: '',
         attributes: {
           required: true,
           autoFocus: true
@@ -33,41 +33,41 @@ class LinkForm extends StartForm {
         errors: []
       },
       {
-        id: "link",
-        value: "",
+        id: 'link',
+        value: '',
         attributes: {
           required: true
         },
         errors: []
       },
       {
-        id: "categories",
-        label: "category",
-        type: "select",
+        id: 'categories',
+        label: 'category',
+        type: 'select',
         children: categories,
         value: categories[0].value,
         errors: []
       },
       {
-        id: "description",
-        type: "textarea",
-        value: "",
+        id: 'description',
+        type: 'textarea',
+        value: '',
         attributes: {
           rows: 4
         },
         errors: []
       },
       {
-        id: "image",
-        type: "file",
+        id: 'image',
+        type: 'file',
         files: false,
         value: false,
         errors: []
       },
       {
-        id: "excludeFromBestOf",
-        label: "Exclude from bestof",
-        type: "checkbox",
+        id: 'excludeFromBestOf',
+        label: 'Exclude from bestof',
+        type: 'checkbox',
         value: false,
         errors: []
       }
@@ -75,8 +75,8 @@ class LinkForm extends StartForm {
 
     this.state = { inputArray };
 
-    this.formName = "Add Link";
-    this.classNames = ["LinkForm__Form"];
+    this.formName = 'Add Link';
+    this.classNames = ['LinkForm__Form'];
   }
 
   catsToOptionsArray(categories: Array<any>): Array<InputOption> {
@@ -90,13 +90,13 @@ class LinkForm extends StartForm {
     if (nextProps.categories.length > 0) {
       this.setState({
         inputArray: this.state.inputArray.reduce((p, c) => {
-          if (c.hasOwnProperty("children") && c.id === "categories") {
+          if (c.hasOwnProperty('children') && c.id === 'categories') {
             c.children = this.catsToOptionsArray(nextProps.categories);
             c.value =
               nextProps.categories.length > 0 &&
-              nextProps.categories[0].hasOwnProperty("id")
+              nextProps.categories[0].hasOwnProperty('id')
                 ? nextProps.categories[0].id
-                : "";
+                : '';
           }
           p.push(c);
           return p;

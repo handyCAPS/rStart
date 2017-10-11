@@ -7,30 +7,25 @@ import StartForm from '../StartForm/StartForm';
 
 import { Input } from '../../types/input.type';
 
-
-type Props = {};
-
 type State = {
-	inputArray: Array<Input>;
+  inputArray: Array<Input>
 };
 
 class ImageForm extends StartForm {
+  constructor() {
+    super();
+    this.state = {
+      inputArray: [
+        {
+          id: 'Name',
+          value: '',
+          errors: []
+        }
+      ]
+    };
 
-	constructor() {
-		super();
-		this.state = {
-			inputArray: [
-				{
-					id: 'Name',
-					value: '',
-					errors: []
-				}
-			]
-		};
-
-		this.formName = 'Add Image';
-	}
-
+    this.formName = 'Add Image';
+  }
 }
 
 export default ImageForm;

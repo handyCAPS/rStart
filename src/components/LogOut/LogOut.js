@@ -6,22 +6,23 @@ import './LogOut.css';
 import Button from '../Button/Button';
 
 type Props = {
-	handleLogOut: Function;
+  handleLogOut: Function
 };
 
 type State = {};
 
 class LogOut extends React.Component<Props, State> {
   render() {
-		const buttonClassNames = ['LogOut__button'];
+    const buttonClassNames = ['LogOut__button'];
     return (
-    	<div className="LogOut">
-    		<Button
-    			label="Log Out"
-    			handleClick={this.props.handleLogOut}
-    			classNames={buttonClassNames} />
-    	</div>
-      );
+      <div className="LogOut">
+        <Button
+          label="Log Out"
+          handleClick={this.props.handleLogOut}
+          classNames={buttonClassNames}
+        />
+      </div>
+    );
   }
 }
 

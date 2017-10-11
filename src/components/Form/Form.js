@@ -1,13 +1,13 @@
 // @flow
-import React from "react";
+import React from 'react';
 
-import FormInputGroup from "../FormInputGroup/FormInputGroup";
+import FormInputGroup from '../FormInputGroup/FormInputGroup';
 
-import "./Form.css";
+import './Form.css';
 
-import Button from "../Button/Button.js";
+import Button from '../Button/Button.js';
 
-import { Input } from "../../types/input.type";
+import { Input } from '../../types/input.type';
 
 type FormStyles = {
   form?: any,
@@ -19,8 +19,8 @@ type Props = {
   handleFormSubmit: Function,
   inputArray: Array<Input>,
   styles?: FormStyles,
-	classNames: Array<string>,
-	children: any
+  classNames: Array<string>,
+  children: any
 };
 
 type State = {
@@ -28,12 +28,12 @@ type State = {
 };
 
 class Form extends React.Component<Props, State> {
-  handleChange: Function;
   handleSubmit: Function;
   getFormValues: Function;
   checkFormForErrors: Function;
   getStyles: Function;
   getClassNames: Function;
+  handleChange: Function;
 
   constructor(props: Props) {
     super(props);
@@ -58,17 +58,17 @@ class Form extends React.Component<Props, State> {
   checkFormForErrors(): boolean {
     let noErrors = true;
     const checkedInputs = this.state.inputs.reduce((prev, cur) => {
-      if (!cur.hasOwnProperty("attributes")) {
+      if (!cur.attributes) {
         return prev;
       }
       switch (true) {
         case cur.attributes.required:
-          if (cur.value === "") {
-            cur.errors.push("This field is required");
+          if (cur.value === '') {
+            cur.errors.push('This field is required');
             noErrors = false;
           }
+        // eslint-disable-next-line no-fallthrough
         default:
-          // eslint-disable-line no-fallthrough
           break;
       }
       prev.push(cur);
@@ -109,32 +109,31 @@ class Form extends React.Component<Props, State> {
   }
 
   getClassNames(): string {
-    let classList = ["Form"];
+    const classList = ['Form'];
     if (!this.props.classNames) {
-      return classList.join(" ");
+      return classList.join(' ');
     }
-    return [...classList, ...this.props.classNames].join(" ");
+    return [...classList, ...this.props.classNames].join(' ');
   }
 
   render() {
     const submitButtonProps = {
-      label: "Submit",
-      type: "submit",
-      classNames: ["Form__button", "Form__button--submit"],
-      styles: this.getStyles("submitButton")
+      label: 'Submit',
+      type: 'submit',
+      classNames: ['Form__button', 'Form__button--submit'],
+      styles: this.getStyles('submitButton')
     };
     return (
-      <div className={this.getClassNames()} style={this.getStyles("form")}>
+      <div className={this.getClassNames()} style={this.getStyles('form')}>
         <form onSubmit={this.handleSubmit}>
           <fieldset
             className="Form__fieldset"
-            style={this.getStyles("fieldset")}
-          >
+            style={this.getStyles('fieldset')}>
             {this.state.inputs.map((input, i) => (
               <FormInputGroup
                 key={i}
                 index={i}
-                styles={this.getStyles("inputs")}
+                styles={this.getStyles('inputs')}
                 handleChange={this.handleChange}
                 {...input}
               />

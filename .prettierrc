@@ -1,0 +1,7 @@
+{
+  "eslintIntegration": true,
+  "singleQuote": true,
+  "cssEnable": ["css", "less", "scss"],
+  "jsxBracketSameLine": true,
+  "parser": "flow"
+}

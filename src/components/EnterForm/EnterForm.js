@@ -1,12 +1,12 @@
 // @flow
-import React from "react";
+import React from 'react';
 
-import "./EnterForm.css";
+import './EnterForm.css';
 
-import LoginForm from "../LoginForm/LoginForm";
-import Button from "../Button/Button";
+import LoginForm from '../LoginForm/LoginForm';
+import Button from '../Button/Button';
 
-import { Colors } from "../../vars/colors";
+import { Colors } from '../../vars/colors';
 
 type Props = {
   handleLoginSubmit: Function,
@@ -15,7 +15,7 @@ type Props = {
 
 type State = {
   isSignup: boolean,
-  buttonLabel: "Log In" | "Sign Up"
+  buttonLabel: 'Log In' | 'Sign Up'
 };
 
 class EnterForm extends React.Component<Props, State> {
@@ -27,7 +27,7 @@ class EnterForm extends React.Component<Props, State> {
 
     this.state = {
       isSignup: false,
-      buttonLabel: "Sign Up"
+      buttonLabel: 'Sign Up'
     };
 
     this.toggleIsSignup = this.toggleIsSignup.bind(this);
@@ -38,7 +38,7 @@ class EnterForm extends React.Component<Props, State> {
     let newIsSignup = !this.state.isSignup;
     this.setState({
       isSignup: newIsSignup,
-      buttonLabel: newIsSignup ? "Log In" : "Sign Up"
+      buttonLabel: newIsSignup ? 'Log In' : 'Sign Up'
     });
   }
 
@@ -51,9 +51,9 @@ class EnterForm extends React.Component<Props, State> {
   }
 
   render() {
-    const buttonClassNames = ["EnterForm__button EnterForm__button--toggle"];
+    const buttonClassNames = ['EnterForm__button EnterForm__button--toggle'];
     const buttonStyles = {
-      border: "none",
+      border: 'none',
       color: Colors.lightShade,
       backgroundColor: Colors.darkShade
     };
@@ -68,7 +68,7 @@ class EnterForm extends React.Component<Props, State> {
         <LoginForm
           isSignup={this.state.isSignup}
           handleSubmit={this.handleLoginFormSubmit}
-          formName={this.state.isSignup ? "Sign Up" : "Log In"}
+          formName={this.state.isSignup ? 'Sign Up' : 'Log In'}
         />
       </div>
     );

@@ -1,12 +1,12 @@
 // @flow
-import React from "react";
+import React from 'react';
 
-import "./StartForm.css";
+import './StartForm.css';
 
-import Form from "../Form/Form";
+import Form from '../Form/Form';
 
-import { Input } from "../../types/input.type";
-import { Colors } from "../../vars/colors";
+import { Input } from '../../types/input.type';
+import { Colors } from '../../vars/colors';
 
 type Props = {
   handleSubmit: Function
@@ -30,13 +30,12 @@ class StartForm extends React.Component<Props, State> {
 
     this.state = { inputArray: [] };
 
-    this.wrapperClass = "";
-    this.formName = "Start Form";
+    this.wrapperClass = '';
+    this.formName = 'Start Form';
     this.classNames = [];
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getFormStyles = this.getFormStyles.bind(this);
-    this.addStyles = this.addStyles.bind(this);
   }
 
   handleSubmit(formValues: any) {
@@ -76,7 +75,7 @@ class StartForm extends React.Component<Props, State> {
 
   render() {
     const divStyle = {
-      backgroundColor: "#FFFFFF"
+      backgroundColor: '#FFFFFF'
     };
     const headerStyle = {
       color: Colors.darkShade
@@ -90,8 +89,7 @@ class StartForm extends React.Component<Props, State> {
           classNames={this.classNames}
           styles={this.getFormStyles()}
           handleFormSubmit={this.handleSubmit}
-          inputArray={this.state.inputArray}
-        >
+          inputArray={this.state.inputArray}>
           {this.props.children !== false && this.props.children}
         </Form>
       </div>

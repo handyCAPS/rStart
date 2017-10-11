@@ -6,40 +6,39 @@ import './CatForm.css';
 import { Input } from '../../types/input.type';
 
 type Props = {
-	handleSubmit: Function;
+  handleSubmit: Function
 };
 
 type State = {
-	inputArray: Array<Input>;
+  inputArray: Array<Input>
 };
 
 class CatForm extends StartForm {
+  constructor() {
+    super();
 
-	constructor() {
-		super();
+    this.state = {
+      inputArray: [
+        {
+          id: 'name',
+          value: '',
+          attributes: {
+            required: true
+          },
+          errors: []
+        },
+        {
+          id: 'excludeFromBestOf',
+          label: 'Exclude From Bestof',
+          type: 'checkbox',
+          value: '',
+          errors: []
+        }
+      ]
+    };
 
-		this.state = {
-			inputArray: [
-				{
-					id: 'name',
-					value: '',
-					attributes: {
-						required: true
-					},
-					errors: []
-				},
-				{
-					id: 'excludeFromBestOf',
-					label: 'Exclude From Bestof',
-					type: 'checkbox',
-					value: '',
-					errors: []
-				}
-		]};
-
-		this.formName = 'Add Category';
-	}
-
+    this.formName = 'Add Category';
+  }
 }
 
 export default CatForm;
