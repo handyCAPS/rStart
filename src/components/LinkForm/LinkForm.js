@@ -16,6 +16,8 @@ type State = {
 
 class LinkForm extends StartForm {
 
+	state: State;
+
 	catsToOptionsArray: Function;
 
 	constructor(props: Props) {
@@ -75,6 +77,7 @@ class LinkForm extends StartForm {
 		this.state = { inputArray };
 
 		this.formName = 'Add Link';
+		this.classNames = ['LinkForm__Form'];
 
 	}
 

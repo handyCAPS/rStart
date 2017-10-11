@@ -306,6 +306,13 @@ class App extends React.Component<Props, State> {
                   <Button label="Image" />
                 </LinkForm>
               )}
+							{this.state.user === null &&
+              this.userLoaded && (
+                <EnterForm
+                  handleSignupSubmit={this.handleSignupSubmit}
+                  handleLoginSubmit={this.handleLoginSubmit}
+                />
+              )}
           </div>
           <div className="col third">
             {this.state.user !== null && (
@@ -319,13 +326,6 @@ class App extends React.Component<Props, State> {
 							<ImageForm handleSubmit={this.handleImageFormSubmit} />
 							</div>
             )}
-            {this.state.user === null &&
-              this.userLoaded && (
-                <EnterForm
-                  handleSignupSubmit={this.handleSignupSubmit}
-                  handleLoginSubmit={this.handleLoginSubmit}
-                />
-              )}
           </div>
         </div>
       </div>

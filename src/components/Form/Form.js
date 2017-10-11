@@ -21,6 +21,7 @@ type Props = {
 	handleFormSubmit: Function;
 	inputArray: Array<Input>;
 	styles?: FormStyles;
+	classNames: Array<string>;
 };
 
 type State = {
@@ -34,8 +35,9 @@ class Form extends React.Component<Props, State> {
 	getFormValues: Function;
 	checkFormForErrors: Function;
 	getStyles: Function;
+	getClassNames: Function;
 
-	constructor(props) {
+	constructor(props: Props) {
 		super(props);
 
 		this.state = {inputs: props.inputArray};
@@ -45,6 +47,7 @@ class Form extends React.Component<Props, State> {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.checkFormForErrors = this.checkFormForErrors.bind(this);
 		this.getStyles = this.getStyles.bind(this);
+		this.getClassNames = this.getClassNames.bind(this);
 	}
 
 	getFormValues() {
@@ -100,6 +103,12 @@ class Form extends React.Component<Props, State> {
 		return this.props.styles[type] ? this.props.styles[type] : {};
 	}
 
+	getClassNames(): string {
+		let classList = ['Form'];
+		if (!this.props.classNames) { return classList.join(' '); }
+		return [...classList, ...this.props.classNames].join(' ');
+	}
+
   render() {
   	const submitButtonProps = {
   		label: 'Submit',
@@ -108,7 +117,7 @@ class Form extends React.Component<Props, State> {
   		styles: this.getStyles('submitButton')
   	};
     return (
-      <div className="Form" style={this.getStyles('form')}>
+      <div className={this.getClassNames()} style={this.getStyles('form')}>
         <form onSubmit={this.handleSubmit}>
           <fieldset className="Form__fieldset" style={this.getStyles('fieldset')}>
               { this.state.inputs.map((input, i) => (

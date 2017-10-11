@@ -21,7 +21,7 @@ type State = {
 class EnterForm extends React.Component<Props, State> {
 
 	toggleIsSignup: Function;
-	handleSubmit: Function;
+	handleLoginFormSubmit: Function;
 
 	constructor() {
 		super();
@@ -32,7 +32,7 @@ class EnterForm extends React.Component<Props, State> {
 		}
 
 		this.toggleIsSignup = this.toggleIsSignup.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleLoginFormSubmit = this.handleLoginFormSubmit.bind(this);
 	}
 
 	toggleIsSignup() {
@@ -43,7 +43,7 @@ class EnterForm extends React.Component<Props, State> {
 		});
 	}
 
-	handleSubmit(formValues: any) {
+	handleLoginFormSubmit(formValues: any) {
 		if (this.state.isSignup) {
 			this.props.handleSignupSubmit(formValues);
 		} else {
@@ -67,7 +67,7 @@ class EnterForm extends React.Component<Props, State> {
     			handleClick={this.toggleIsSignup} />
     		<LoginForm
     			isSignup={this.state.isSignup}
-    			handleSubmit={this.handleSubmit}
+    			handleSubmit={this.handleLoginFormSubmit}
     			formName={this.state.isSignup ? 'Sign Up' : 'Log In'} />
     	</div>
       );

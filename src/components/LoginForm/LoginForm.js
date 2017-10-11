@@ -9,6 +9,7 @@ import './LoginForm.css';
 type Props = {
 	isSignup: boolean;
 	formName: string;
+	handleLoginSubmit: Function;
 };
 
 type State = {
@@ -16,7 +17,9 @@ type State = {
 	inputArray: Array<Input>;
 };
 
-class LoginForm extends StartForm<Props, State> {
+class LoginForm extends StartForm {
+
+	handleSubmit: Function;
 
 	constructor() {
 		super();
@@ -49,11 +52,7 @@ class LoginForm extends StartForm<Props, State> {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
-	handleSubmit(formValues: any) {
-		this.props.handleSubmit(formValues);
-	}
-
-	componentWillReceiveProps(nextProps) {
+	componentWillReceiveProps(nextProps: Props) {
 		if (nextProps && nextProps.hasOwnProperty('formName')) {
 			this.formName = nextProps.formName;
 		}

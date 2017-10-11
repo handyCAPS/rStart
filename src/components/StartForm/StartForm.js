@@ -20,16 +20,20 @@ class StartForm extends React.Component<Props, State> {
 
 	wrapperClass: string;
 	formName: string;
+	classNames: Array<string>;
 
 	handleSubmit: Function;
+	getFormStyles: Function;
+	addStyles: Function;
 
 	constructor() {
 		super();
 
-		this.state = {inputArray: {}};;
+		this.state = {inputArray: []};;
 
 		this.wrapperClass = '';
 		this.formName = 'Start Form';
+		this.classNames = [];
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.getFormStyles = this.getFormStyles.bind(this);
@@ -82,6 +86,7 @@ class StartForm extends React.Component<Props, State> {
     	<div className="StartForm" style={divStyle}>
     		<h3 className="StartForm__header" style={headerStyle}>{this.formName}</h3>
     		<Form
+					classNames={this.classNames}
     			styles={this.getFormStyles()}
     			handleFormSubmit={this.handleSubmit}
     			inputArray={this.state.inputArray}>
