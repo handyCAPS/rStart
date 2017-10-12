@@ -66,7 +66,6 @@ class EnterForm extends React.Component<Props, State> {
           handleClick={this.toggleIsSignup}
         />
         <LoginForm
-          isSignup={this.state.isSignup}
           handleSubmit={this.handleLoginFormSubmit}
           formName={this.state.isSignup ? 'Sign Up' : 'Log In'}
         />

@@ -1,43 +1,39 @@
 // @flow
 
-import StartForm from "../StartForm/StartForm";
+import StartForm from '../StartForm/StartForm';
 
-import { Input } from "../../types/input.type";
+import { Input } from '../../types/input.type';
 
-import "./LoginForm.css";
+import './LoginForm.css';
 
 type Props = {
   isSignup: boolean,
-  formName: string,
-  handleLoginSubmit: Function
+  formName: string
 };
 
 type State = {
-  isSignup: boolean,
   inputArray: Array<Input>
 };
 
 class LoginForm extends StartForm {
-  handleSubmit: Function;
-
   constructor() {
     super();
 
     this.state = {
       inputArray: [
         {
-          id: "email",
-          type: "email",
-          value: "",
+          id: 'email',
+          type: 'email',
+          value: '',
           attributes: {
             required: true
           },
           errors: []
         },
         {
-          id: "password",
-          type: "password",
-          value: "",
+          id: 'password',
+          type: 'password',
+          value: '',
           attributes: {
             required: true
           },
@@ -46,13 +42,11 @@ class LoginForm extends StartForm {
       ]
     };
 
-    this.formName = "Log In";
-
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.formName = 'Log In';
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps && nextProps.hasOwnProperty("formName")) {
+    if (nextProps && nextProps.hasOwnProperty('formName')) {
       this.formName = nextProps.formName;
     }
   }

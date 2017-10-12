@@ -2,6 +2,7 @@
 
 .EnterForm {
 	position: relative;
+	margin-top: 25%;
 }
 
 .EnterForm__button--toggle {
@@ -10,8 +11,4 @@
 	right: 2.618rem;
 	top: 1em;
 	font-size: 0.85em;
-}
-
-.EnterForm__Form {
-	margin-top: 25%;
 }

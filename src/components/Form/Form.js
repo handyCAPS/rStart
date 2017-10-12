@@ -35,10 +35,14 @@ class Form extends React.Component<Props, State> {
   getClassNames: Function;
   handleChange: Function;
 
+  addedClasses: Array<string>;
+
   constructor(props: Props) {
     super(props);
 
     this.state = { inputs: props.inputArray };
+
+    this.addedClasses = [];
 
     this.handleChange = this.handleChange.bind(this);
     this.getFormValues = this.getFormValues.bind(this);
@@ -113,7 +117,9 @@ class Form extends React.Component<Props, State> {
     if (!this.props.classNames) {
       return classList.join(' ');
     }
-    return [...classList, ...this.props.classNames].join(' ');
+    return [...classList, ...this.addedClasses, ...this.props.classNames].join(
+      ' '
+    );
   }
 
   render() {
