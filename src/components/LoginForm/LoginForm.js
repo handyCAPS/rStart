@@ -16,6 +16,7 @@ type State = {
 };
 
 class LoginForm extends StartForm {
+  state: State;
   constructor() {
     super();
 

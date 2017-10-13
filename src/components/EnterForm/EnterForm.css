@@ -12,3 +12,40 @@
 	top: 1em;
 	font-size: 0.85em;
 }
+
+.spinningAndLeaving {
+	-webkit-animation: spinningAndLeaving 1s infinite;
+	        animation: spinningAndLeaving 1s infinite;
+}
+
+@-webkit-keyframes spinningAndLeaving {
+	50% {
+		position: absolute;
+		z-index: 999;
+		left: 10%;
+		-webkit-transform: rotate(720deg) scale(0.25);
+		        transform: rotate(720deg) scale(0.25);
+	}
+	100% {
+			-webkit-transform: rotate(1440deg) scale(0.01);
+			        transform: rotate(1440deg) scale(0.01);
+			left: 50%;
+			top: 0;
+	}
+}
+
+@keyframes spinningAndLeaving {
+	50% {
+		position: absolute;
+		z-index: 999;
+		left: 10%;
+		-webkit-transform: rotate(720deg) scale(0.25);
+		        transform: rotate(720deg) scale(0.25);
+	}
+	100% {
+			-webkit-transform: rotate(1440deg) scale(0.01);
+			        transform: rotate(1440deg) scale(0.01);
+			left: 50%;
+			top: 0;
+	}
+}

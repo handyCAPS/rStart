@@ -15,7 +15,8 @@ type Props = {
 
 type State = {
   isSignup: boolean,
-  buttonLabel: 'Log In' | 'Sign Up'
+  buttonLabel: 'Log In' | 'Sign Up',
+  leaving: boolean
 };
 
 class EnterForm extends React.Component<Props, State> {
@@ -27,7 +28,8 @@ class EnterForm extends React.Component<Props, State> {
 
     this.state = {
       isSignup: false,
-      buttonLabel: 'Sign Up'
+      buttonLabel: 'Sign Up',
+      leaving: false
     };
 
     this.toggleIsSignup = this.toggleIsSignup.bind(this);
@@ -48,6 +50,7 @@ class EnterForm extends React.Component<Props, State> {
     } else {
       this.props.handleLoginSubmit(formValues);
     }
+    this.setState({ leaving: true });
   }
 
   render() {
@@ -58,7 +61,11 @@ class EnterForm extends React.Component<Props, State> {
       backgroundColor: Colors.darkShade
     };
     return (
-      <div className="EnterForm">
+      <div
+        className={[
+          'EnterForm',
+          this.state.leaving ? 'spinningAndLeaving' : ''
+        ].join(' ')}>
         <Button
           label={this.state.buttonLabel}
           classNames={buttonClassNames}

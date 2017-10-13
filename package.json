@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "autoprefixer": "^7.1.5",
     "babel-eslint": "^8.0.1",
     "babel-preset-flow": "^6.23.0",
     "eslint-config-airbnb": "^16.0.0",
