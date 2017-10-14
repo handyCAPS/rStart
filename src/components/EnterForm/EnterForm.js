@@ -53,6 +53,13 @@ class EnterForm extends React.Component<Props, State> {
     this.setState({ leaving: true });
   }
 
+  animationEnded() {
+    console.log('====================================');
+    console.log('Animation ended');
+    console.dir(arguments);
+    console.log('====================================');
+  }
+
   render() {
     const buttonClassNames = ['EnterForm__button EnterForm__button--toggle'];
     const buttonStyles = {
@@ -65,7 +72,8 @@ class EnterForm extends React.Component<Props, State> {
         className={[
           'EnterForm',
           this.state.leaving ? 'spinningAndLeaving' : ''
-        ].join(' ')}>
+        ].join(' ')}
+        onTransitionEnd={this.animationEnded()}>
         <Button
           label={this.state.buttonLabel}
           classNames={buttonClassNames}
