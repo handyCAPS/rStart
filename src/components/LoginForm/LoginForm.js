@@ -46,8 +46,8 @@ class LoginForm extends StartForm {
     this.formName = 'Log In';
   }
 
-  componentWillReceiveProps(nextProps: Props) {
-    if (nextProps && nextProps.hasOwnProperty('formName')) {
+  componentWillReceiveProps(nextProps: any) {
+    if (nextProps && Object.prototype.hasOwnProperty.call(nextProps, 'formName')) {
       this.formName = nextProps.formName;
     }
   }
