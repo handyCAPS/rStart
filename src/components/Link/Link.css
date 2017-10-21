@@ -35,7 +35,8 @@
 	bottom: 0;
 	right: 0;
 	padding: 0.618em;
-	background-color: rgba(0,0,0,0.17);
+	background-color: black;
+	visibility: hidden;
 }
 
 .Link__delete {
