@@ -123,11 +123,16 @@ class App extends React.Component<Props, State> {
   }
 
   prepareLinkForStorage(link: linkItem): linkStorageItem {
+    const protocolRegEx = /^https?:\/\//g;
+    const linkUrl = protocolRegEx.test(link.link)
+      ? link.link
+      : 'http://' + link.link;
     let storageItem = {
       dateAdded: Date.now(),
       clicks: 0,
       excludeFromBestOf: false,
       ...link,
+      link: linkUrl,
       categories: {
         [link.categories]: true
       }
