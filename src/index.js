@@ -7,6 +7,11 @@ import registerServiceWorker from './registerServiceWorker';
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 
+/**
+ * Hot Module Replacement emulation
+ * To be removed before production
+ * See https://medium.com/superhighfives/hot-reloading-create-react-app-73297a00dcad
+ */
 const rootEl = document.getElementById('root');
 
 if (module.hot) {
