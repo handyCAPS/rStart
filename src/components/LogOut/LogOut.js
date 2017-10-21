@@ -5,6 +5,8 @@ import './LogOut.css';
 
 import Button from '../Button/Button';
 
+import { Colors } from '../../vars/colors';
+
 type Props = {
   handleLogOut: Function
 };
@@ -20,6 +22,7 @@ class LogOut extends React.Component<Props, State> {
           label="Log Out"
           handleClick={this.props.handleLogOut}
           classNames={buttonClassNames}
+          styles={{ backgroundColor: Colors.lightShade }}
         />
       </div>
     );

@@ -20,6 +20,10 @@ class Link extends React.Component<Props, State> {
     return this.props.styles[type] ? this.props.styles[type] : {};
   };
   render() {
+    const imgStyle = {
+      backgroundImage: 'url(http://placecage.com/600/600)',
+      backgroundColor: '#000'
+    };
     return (
       <div className="Link" style={this.getStyles('parent')}>
         <div
@@ -39,11 +43,9 @@ class Link extends React.Component<Props, State> {
           className="Link__anchor">
           <div className="Link__body" style={this.getStyles('body')}>
             <figure className="Link__figure">
-              <img
-                src="http://placecage.com/400/400"
-                alt=""
-                className="Link__img"
-              />
+              <div className="Link__img-wrap">
+                <div className="Link__img" style={imgStyle} />
+              </div>
               <figcaption
                 className="Link__title"
                 style={this.getStyles('header')}>

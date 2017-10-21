@@ -272,7 +272,7 @@ class App extends React.Component<Props, State> {
       header: {
         color: Colors.lightShade
       },
-      body: {
+      parent: {
         backgroundColor: Colors.darkAccent
       }
     };
@@ -282,18 +282,23 @@ class App extends React.Component<Props, State> {
           {this.state.user !== null && (
             <LogOut handleLogOut={this.handleLogOut} />
           )}
-          <div className="col third links">
-            {this.state.user !== null &&
-              this.state.links.map((link, i) => (
-                <Link
-                  key={i}
-                  styles={linkStyles}
-                  {...link}
-                  handleDelete={this.handleDelete.bind(null, this.Columns.link)}
-                />
-              ))}
-          </div>
-          <div className="col third">
+          <section>
+            <div className="links">
+              {this.state.user !== null &&
+                this.state.links.map((link, i) => (
+                  <Link
+                    key={i}
+                    styles={linkStyles}
+                    {...link}
+                    handleDelete={this.handleDelete.bind(
+                      null,
+                      this.Columns.link
+                    )}
+                  />
+                ))}
+            </div>
+          </section>
+          <section className="col third">
             {this.state.user !== null &&
               this.state.categories.length > 0 && (
                 <LinkForm
@@ -312,8 +317,8 @@ class App extends React.Component<Props, State> {
                   handleLoginSubmit={this.handleLoginSubmit}
                 />
               )}
-          </div>
-          <div className="col third">
+          </section>
+          <section className="col third">
             {this.state.user !== null && (
               <div>
                 <CatForm
@@ -325,7 +330,7 @@ class App extends React.Component<Props, State> {
                 <ImageForm handleSubmit={this.handleImageFormSubmit} />
               </div>
             )}
-          </div>
+          </section>
         </div>
       </div>
     );

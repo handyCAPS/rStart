@@ -50,7 +50,7 @@ fieldset {
 
 .body {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(3, 1fr);
 	grid-gap: 1.618rem;
 	padding: 1.618rem;
 }
@@ -73,8 +73,8 @@ fieldset {
 }
 
 .links {
-	display: flex;
-	flex-flow: wrap row;
-	justify-content: space-between;
-	align-content: flex-start;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	/* grid-auto-rows: minmax(12em, auto); */
+	grid-gap: 1em;
 }

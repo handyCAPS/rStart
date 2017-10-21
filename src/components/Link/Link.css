@@ -1,50 +1,41 @@
 
 
 .Link {
+	font-size: 0.8rem;
 	position: relative;
-	font-size: 1rem;
-	margin-bottom: 1em;
-	width: 9rem;
-	height: 11rem;
+	padding: 0.618em;
+	padding-bottom: 0;
+	border-radius: 6px;
+	overflow: hidden;
 }
 
-.Link__body {
-	padding: 0.618em;
+.Link__title {
+	padding: 0.618em 0;
+	text-transform: capitalize;
+	font-family: 'PT Sans Bold', sans-erif;
+}
+
+.Link__figure {
+	width: 100%;
+	margin: 0;
+}
+
+.Link__img {
+	overflow: hidden;
+	height: 0;
+	padding-top: 100%;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.Link__text {
 	position: absolute;
 	top: 0;
 	left: 0;
 	bottom: 0;
 	right: 0;
-	border-radius: 6px;
-	/* box-shadow: 0 0 4px 2px rgba(0,0,0,0.17); */
-}
-
-.Link__title {
-	font-size: 1.2em;
-	font-family: 'Arvo', sans-serif;
-	color: black;
-	padding: 0.35em 0 0;
-	z-index: 999;
-}
-
-.Link__figure {
-	position: absolute;
-	top: 0.5em;
-	left: 0.5em;
-	width: 8em;
-	height: 8em;
-	margin: 0;
-}
-
-.Link__img {
-	vertical-align: middle;
-	width: 100%;
-	border-radius: 4px 4px 0 0;
-}
-
-.Link__text {
-	position: absolute;
-	padding: 0 0.5em;
+	padding: 0.618em;
+	background-color: rgba(0,0,0,0.17);
 }
 
 .Link__delete {
