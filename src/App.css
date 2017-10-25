@@ -65,6 +65,9 @@ fieldset {
 	clear: both;
 }
 
+.container--form--enter {
+	grid-column: 2;
+}
 
 @media screen and (max-width: 1280px) {
 

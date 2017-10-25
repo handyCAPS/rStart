@@ -37,7 +37,7 @@ type State = {
   links: Array<linkItem>,
   categories: Array<any>,
   user: any,
-  showLinks: boolean
+  showForms: boolean
 };
 
 class App extends React.Component<Props, State> {
@@ -54,7 +54,7 @@ class App extends React.Component<Props, State> {
   handleAuthChange: Function;
   handleLogOut: Function;
   handleImageFormSubmit: Function;
-  toggleShowLinks: Function;
+  toggleShowForms: Function;
 
   constructor() {
     super();
@@ -63,7 +63,7 @@ class App extends React.Component<Props, State> {
       links: [],
       categories: [],
       user: false,
-      showLinks: false
+      showForms: false
     };
 
     this.Columns = {
@@ -79,7 +79,7 @@ class App extends React.Component<Props, State> {
     this.handleAuthChange = this.handleAuthChange.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handleImageFormSubmit = this.handleImageFormSubmit.bind(this);
-    this.toggleShowLinks = this.toggleShowLinks.bind(this);
+    this.toggleShowForms = this.toggleShowForms.bind(this);
   }
 
   getLinks() {
@@ -262,10 +262,10 @@ class App extends React.Component<Props, State> {
       .catch();
   }
 
-  toggleShowLinks(): void {
-    const newState = !this.state.showLinks;
+  toggleShowForms(): void {
+    const newState = !this.state.showForms;
     this.setState({
-      showLinks: newState
+      showForms: newState
     });
   }
 
@@ -289,9 +289,18 @@ class App extends React.Component<Props, State> {
           {this.state.user !== null && (
             <LogOut handleLogOut={this.handleLogOut} />
           )}
-          <div className="container container--form container--form--link">
-            {this.state.user !== null &&
-              this.state.categories.length > 0 && (
+          {this.state.user === null &&
+            this.userLoaded && (
+              <div className="container container--form container--form--enter">
+                <EnterForm
+                  handleSignupSubmit={this.handleSignupSubmit}
+                  handleLoginSubmit={this.handleLoginSubmit}
+                />
+              </div>
+            )}
+          {this.state.user !== null && [
+            <div className="container container--form container--form--link">
+              {this.state.categories.length > 0 && (
                 <LinkForm
                   categories={this.state.categories}
                   handleSubmit={this.handleFormSubmit.bind(
@@ -301,35 +310,25 @@ class App extends React.Component<Props, State> {
                   <Button label="Image" />
                 </LinkForm>
               )}
-            {this.state.user === null &&
-              this.userLoaded && (
-                <EnterForm
-                  handleSignupSubmit={this.handleSignupSubmit}
-                  handleLoginSubmit={this.handleLoginSubmit}
-                />
-              )}
-          </div>
-          <div className="container container--form container--form--category">
-            {this.state.user !== null && (
+            </div>,
+            <div className="container container--form container--form--category">
               <CatForm
                 handleSubmit={this.handleFormSubmit.bind(
                   null,
                   this.Columns.category
                 )}
               />
-            )}
-          </div>
-          <div className="container container--form container--form--image">
-            {this.state.user !== null && (
+            </div>,
+            <div className="container container--form container--form--image">
               <ImageForm handleSubmit={this.handleImageFormSubmit} />
-            )}
-          </div>
-          <div className="container container--links">
-            <Links
-              links={this.state.links}
-              handleDelete={this.handleDelete.bind(null, this.Columns.link)}
-            />
-          </div>
+            </div>,
+            <div className="container container--links">
+              <Links
+                links={this.state.links}
+                handleDelete={this.handleDelete.bind(null, this.Columns.link)}
+              />
+            </div>
+          ]}
         </div>
       </div>
     );
