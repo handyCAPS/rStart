@@ -11,6 +11,7 @@ import LogOut from './components/LogOut/LogOut';
 import Button from './components/Button/Button';
 import ImageForm from './components/ImageForm/ImageForm';
 import Links from './components/Links/Links';
+import NavBar from './components/NavBar/NavBar';
 
 import firebase from './firebase';
 
@@ -37,7 +38,8 @@ type State = {
   links: Array<linkItem>,
   categories: Array<any>,
   user: any,
-  showForms: boolean
+  showForms: boolean,
+  page: string
 };
 
 class App extends React.Component<Props, State> {
@@ -55,6 +57,7 @@ class App extends React.Component<Props, State> {
   handleLogOut: Function;
   handleImageFormSubmit: Function;
   toggleShowForms: Function;
+  handleNav: Function;
 
   constructor() {
     super();
@@ -80,6 +83,7 @@ class App extends React.Component<Props, State> {
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handleImageFormSubmit = this.handleImageFormSubmit.bind(this);
     this.toggleShowForms = this.toggleShowForms.bind(this);
+    this.handleNav = this.handleNav.bind(this);
   }
 
   getLinks() {
@@ -262,6 +266,10 @@ class App extends React.Component<Props, State> {
       .catch();
   }
 
+  handleNav(page: string) {
+    this.setState({ page });
+  }
+
   toggleShowForms(): void {
     const newState = !this.state.showForms;
     this.setState({
@@ -285,6 +293,7 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="outerWrap" style={bodyStyles}>
+        {this.state.user !== null && <NavBar handleNav={this.handleNav} />}
         <div className="body row">
           {this.state.user !== null && (
             <LogOut handleLogOut={this.handleLogOut} />
