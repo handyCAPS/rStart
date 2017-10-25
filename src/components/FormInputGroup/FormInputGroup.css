@@ -14,7 +14,8 @@
 .Form__label {
   display: inline-block;
   width: 30%;
-  text-align: right;
+	text-align: right;
+	padding-left: 0;
   text-transform: capitalize;
 }
 

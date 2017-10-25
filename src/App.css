@@ -50,7 +50,7 @@ fieldset {
 
 .body {
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
 	grid-gap: 1.618rem;
 	padding: 1.618rem;
 }
@@ -65,16 +65,19 @@ fieldset {
 	clear: both;
 }
 
-.third {
-	/* min-height: 1px;
-	float: left;
-	width: calc(100% / 3);
-	padding: 1rem; */
-}
-
 .links {
 	display: grid;
-	grid-template-columns: repeat(4, 1fr);
+	grid-template-columns: repeat(auto-fill, minmax(6em, 1fr));
 	/* grid-auto-rows: minmax(12em, auto); */
 	grid-gap: 1em;
+}
+
+@media screen and (max-width: 1280px) {
+
+}
+
+@media screen and (max-width: 768px) {
+	html {
+		font-size: 90%;
+	}
 }
