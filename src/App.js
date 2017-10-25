@@ -287,7 +287,7 @@ class App extends React.Component<Props, State> {
           {this.state.user !== null && (
             <LogOut handleLogOut={this.handleLogOut} />
           )}
-          <section>
+          <div className="container container--links">
             <div className="links">
               {this.state.user !== null &&
                 this.state.links.map((link, i) => (
@@ -302,8 +302,8 @@ class App extends React.Component<Props, State> {
                   />
                 ))}
             </div>
-          </section>
-          <section className="col third">
+          </div>
+          <div className="container container--form container--form--link">
             {this.state.user !== null &&
               this.state.categories.length > 0 && (
                 <LinkForm
@@ -322,20 +322,22 @@ class App extends React.Component<Props, State> {
                   handleLoginSubmit={this.handleLoginSubmit}
                 />
               )}
-          </section>
-          <section className="col third">
+          </div>
+          <div className="container container--form container--form--category">
             {this.state.user !== null && (
-              <div>
-                <CatForm
-                  handleSubmit={this.handleFormSubmit.bind(
-                    null,
-                    this.Columns.category
-                  )}
-                />
-                <ImageForm handleSubmit={this.handleImageFormSubmit} />
-              </div>
+              <CatForm
+                handleSubmit={this.handleFormSubmit.bind(
+                  null,
+                  this.Columns.category
+                )}
+              />
             )}
-          </section>
+          </div>
+          <div className="container container--form container--form--image">
+            {this.state.user !== null && (
+              <ImageForm handleSubmit={this.handleImageFormSubmit} />
+            )}
+          </div>
         </div>
       </div>
     );
