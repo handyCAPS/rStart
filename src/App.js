@@ -10,6 +10,7 @@ import Link from './components/Link/Link';
 import LogOut from './components/LogOut/LogOut';
 import Button from './components/Button/Button';
 import ImageForm from './components/ImageForm/ImageForm';
+import Links from './components/Links/Links';
 
 import firebase from './firebase';
 
@@ -35,7 +36,8 @@ type Props = {};
 type State = {
   links: Array<linkItem>,
   categories: Array<any>,
-  user: any
+  user: any,
+  showLinks: boolean
 };
 
 class App extends React.Component<Props, State> {
@@ -52,6 +54,7 @@ class App extends React.Component<Props, State> {
   handleAuthChange: Function;
   handleLogOut: Function;
   handleImageFormSubmit: Function;
+  toggleShowLinks: Function;
 
   constructor() {
     super();
@@ -59,7 +62,8 @@ class App extends React.Component<Props, State> {
     this.state = {
       links: [],
       categories: [],
-      user: false
+      user: false,
+      showLinks: false
     };
 
     this.Columns = {
@@ -75,6 +79,7 @@ class App extends React.Component<Props, State> {
     this.handleAuthChange = this.handleAuthChange.bind(this);
     this.handleLogOut = this.handleLogOut.bind(this);
     this.handleImageFormSubmit = this.handleImageFormSubmit.bind(this);
+    this.toggleShowLinks = this.toggleShowLinks.bind(this);
   }
 
   getLinks() {
@@ -147,7 +152,7 @@ class App extends React.Component<Props, State> {
     };
   }
 
-  handleFormSubmit(type: string, formValues: linkItem | CategoryItem) {
+  handleFormSubmit(type: string, formValues: linkItem | CategoryItem): void {
     const refString = [this.state.user.uid, type].join('/');
     const itemsRef = firebase
       .database()
@@ -184,16 +189,16 @@ class App extends React.Component<Props, State> {
     }
   }
 
-  handleImageUpload(files: Array<any>, linkId: string) {
+  handleImageUpload(files: Array<any>, linkId: string): void {
     console.log('id:', linkId);
     console.dir(files);
   }
 
-  handleImageFormSubmit(formValues: any) {
+  handleImageFormSubmit(formValues: any): void {
     console.dir(formValues);
   }
 
-  handleLoginSubmit(formValues: any) {
+  handleLoginSubmit(formValues: any): void {
     const { email, password } = formValues;
     firebase
       .auth()
@@ -203,7 +208,7 @@ class App extends React.Component<Props, State> {
       });
   }
 
-  handleSignupSubmit(formValues: any) {
+  handleSignupSubmit(formValues: any): void {
     const { email, password } = formValues;
     firebase
       .auth()
@@ -213,7 +218,7 @@ class App extends React.Component<Props, State> {
       });
   }
 
-  handleDelete(type: string, id: string, categories?: any) {
+  handleDelete(type: string, id: string, categories?: any): void {
     firebase
       .database()
       .ref(this.state.user.uid)
@@ -239,7 +244,7 @@ class App extends React.Component<Props, State> {
     }
   }
 
-  handleAuthChange() {
+  handleAuthChange(): void {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user });
       if (user) {
@@ -249,12 +254,19 @@ class App extends React.Component<Props, State> {
     });
   }
 
-  handleLogOut() {
+  handleLogOut(): void {
     firebase
       .auth()
       .signOut()
       .then()
       .catch();
+  }
+
+  toggleShowLinks(): void {
+    const newState = !this.state.showLinks;
+    this.setState({
+      showLinks: newState
+    });
   }
 
   componentDidMount() {
@@ -270,39 +282,13 @@ class App extends React.Component<Props, State> {
     const bodyStyles = {
       backgroundColor: Colors.lightShade
     };
-    const linkStyles = {
-      anchor: {
-        color: Colors.lightShade
-      },
-      header: {
-        color: Colors.lightShade
-      },
-      parent: {
-        backgroundColor: Colors.darkAccent
-      }
-    };
+
     return (
       <div className="outerWrap" style={bodyStyles}>
         <div className="body row">
           {this.state.user !== null && (
             <LogOut handleLogOut={this.handleLogOut} />
           )}
-          <div className="container container--links">
-            <div className="links">
-              {this.state.user !== null &&
-                this.state.links.map((link, i) => (
-                  <Link
-                    key={i}
-                    styles={linkStyles}
-                    {...link}
-                    handleDelete={this.handleDelete.bind(
-                      null,
-                      this.Columns.link
-                    )}
-                  />
-                ))}
-            </div>
-          </div>
           <div className="container container--form container--form--link">
             {this.state.user !== null &&
               this.state.categories.length > 0 && (
@@ -337,6 +323,12 @@ class App extends React.Component<Props, State> {
             {this.state.user !== null && (
               <ImageForm handleSubmit={this.handleImageFormSubmit} />
             )}
+          </div>
+          <div className="container container--links">
+            <Links
+              links={this.state.links}
+              handleDelete={this.handleDelete.bind(null, this.Columns.link)}
+            />
           </div>
         </div>
       </div>
