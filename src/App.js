@@ -66,7 +66,8 @@ class App extends React.Component<Props, State> {
       links: [],
       categories: [],
       user: false,
-      showForms: false
+      showForms: false,
+      page: 'forms'
     };
 
     this.Columns = {
