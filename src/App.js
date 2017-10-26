@@ -7,7 +7,6 @@ import LinkForm from './components/LinkForm/LinkForm';
 import CatForm from './components/CatForm/CatForm';
 import EnterForm from './components/EnterForm/EnterForm';
 import Link from './components/Link/Link';
-import LogOut from './components/LogOut/LogOut';
 import Button from './components/Button/Button';
 import ImageForm from './components/ImageForm/ImageForm';
 import Links from './components/Links/Links';
@@ -39,7 +38,7 @@ type State = {
   categories: Array<any>,
   user: any,
   showForms: boolean,
-  page: string
+  page: 'forms' | 'links'
 };
 
 class App extends React.Component<Props, State> {
@@ -67,7 +66,7 @@ class App extends React.Component<Props, State> {
       categories: [],
       user: false,
       showForms: false,
-      page: 'forms'
+      page: 'links'
     };
 
     this.Columns = {
@@ -294,11 +293,10 @@ class App extends React.Component<Props, State> {
 
     return (
       <div className="outerWrap" style={bodyStyles}>
-        {this.state.user !== null && <NavBar handleNav={this.handleNav} />}
+        {this.state.user !== null && (
+          <NavBar handleNav={this.handleNav} handleLogOut={this.handleLogOut} />
+        )}
         <div className="body row">
-          {this.state.user !== null && (
-            <LogOut handleLogOut={this.handleLogOut} />
-          )}
           {this.state.user === null &&
             this.userLoaded && (
               <div className="container container--form container--form--enter">
@@ -309,35 +307,46 @@ class App extends React.Component<Props, State> {
               </div>
             )}
           {this.state.user !== null && [
-            <div className="container container--form container--form--link">
-              {this.state.categories.length > 0 && (
-                <LinkForm
-                  categories={this.state.categories}
-                  handleSubmit={this.handleFormSubmit.bind(
-                    null,
-                    this.Columns.link
-                  )}>
-                  <Button label="Image" />
-                </LinkForm>
-              )}
-            </div>,
-            <div className="container container--form container--form--category">
-              <CatForm
-                handleSubmit={this.handleFormSubmit.bind(
-                  null,
-                  this.Columns.category
-                )}
-              />
-            </div>,
-            <div className="container container--form container--form--image">
-              <ImageForm handleSubmit={this.handleImageFormSubmit} />
-            </div>,
-            <div className="container container--links">
-              <Links
-                links={this.state.links}
-                handleDelete={this.handleDelete.bind(null, this.Columns.link)}
-              />
-            </div>
+            [
+              this.state.page === 'forms' && [
+                <div className="container container--form container--form--link">
+                  {this.state.categories.length > 0 && (
+                    <LinkForm
+                      categories={this.state.categories}
+                      handleSubmit={this.handleFormSubmit.bind(
+                        null,
+                        this.Columns.link
+                      )}>
+                      <Button label="Image" />
+                    </LinkForm>
+                  )}
+                </div>,
+                <div className="container container--form container--form--category">
+                  <CatForm
+                    handleSubmit={this.handleFormSubmit.bind(
+                      null,
+                      this.Columns.category
+                    )}
+                  />
+                </div>,
+                <div className="container container--form container--form--image">
+                  <ImageForm handleSubmit={this.handleImageFormSubmit} />
+                </div>
+              ]
+            ],
+            [
+              this.state.page === 'links' && (
+                <div className="container container--links">
+                  <Links
+                    links={this.state.links}
+                    handleDelete={this.handleDelete.bind(
+                      null,
+                      this.Columns.link
+                    )}
+                  />
+                </div>
+              )
+            ]
           ]}
         </div>
       </div>

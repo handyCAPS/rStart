@@ -12,12 +12,20 @@
 	clear: both;
 }
 
-.NavBar__list {
+.NavBar__list--left {
+	float: left;
+	padding-left: 1.382em;
+}
+
+.NavBar__list--right {
 	float: right;
+	padding-right: 1.382em;
 }
 
 .NavBar__item {
+	text-transform: uppercase;
+	font-family: 'PT Sans', sans-serif;
 	float: left;
-	padding: 0.5em 0.75em;
+	margin: 0.618em;
 	cursor: pointer;
 }
