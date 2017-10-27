@@ -73,20 +73,9 @@ class App extends React.Component<Props, State> {
       link: 'link',
       category: 'category'
     };
-
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-    this.handleImageUpload = this.handleImageUpload.bind(this);
-    this.getLinks = this.getLinks.bind(this);
-    this.getCategories = this.getCategories.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleAuthChange = this.handleAuthChange.bind(this);
-    this.handleLogOut = this.handleLogOut.bind(this);
-    this.handleImageFormSubmit = this.handleImageFormSubmit.bind(this);
-    this.toggleShowForms = this.toggleShowForms.bind(this);
-    this.handleNav = this.handleNav.bind(this);
   }
 
-  getLinks() {
+  getLinks = () => {
     const itemsRef = firebase
       .database()
       .ref(this.state.user.uid)
@@ -108,9 +97,9 @@ class App extends React.Component<Props, State> {
 
       this.setState({ links: newState });
     });
-  }
+  };
 
-  getCategories() {
+  getCategories = () => {
     const catsRef = firebase
       .database()
       .ref(this.state.user.uid)
@@ -129,7 +118,7 @@ class App extends React.Component<Props, State> {
 
       this.setState({ categories: newState });
     });
-  }
+  };
 
   prepareLinkForStorage(link: linkItem): linkStorageItem {
     const protocolRegEx = /^https?:\/\//g;
@@ -156,7 +145,10 @@ class App extends React.Component<Props, State> {
     };
   }
 
-  handleFormSubmit(type: string, formValues: linkItem | CategoryItem): void {
+  handleFormSubmit = (
+    type: string,
+    formValues: linkItem | CategoryItem
+  ): void => {
     const refString = [this.state.user.uid, type].join('/');
     const itemsRef = firebase
       .database()
@@ -191,18 +183,18 @@ class App extends React.Component<Props, State> {
           });
       }
     }
-  }
+  };
 
-  handleImageUpload(files: Array<any>, linkId: string): void {
+  handleImageUpload = (files: Array<any>, linkId: string): void => {
     console.log('id:', linkId);
     console.dir(files);
-  }
+  };
 
-  handleImageFormSubmit(formValues: any): void {
+  handleImageFormSubmit = (formValues: any): void => {
     console.dir(formValues);
-  }
+  };
 
-  handleLoginSubmit(formValues: any): void {
+  handleLoginSubmit = (formValues: any): void => {
     const { email, password } = formValues;
     firebase
       .auth()
@@ -210,9 +202,9 @@ class App extends React.Component<Props, State> {
       .catch(error => {
         console.dir(error);
       });
-  }
+  };
 
-  handleSignupSubmit(formValues: any): void {
+  handleSignupSubmit = (formValues: any): void => {
     const { email, password } = formValues;
     firebase
       .auth()
@@ -220,9 +212,9 @@ class App extends React.Component<Props, State> {
       .catch(error => {
         console.dir(error);
       });
-  }
+  };
 
-  handleDelete(type: string, id: string, categories?: any): void {
+  handleDelete = (type: string, id: string, categories?: any): void => {
     firebase
       .database()
       .ref(this.state.user.uid)
@@ -246,9 +238,9 @@ class App extends React.Component<Props, State> {
           .remove();
       }
     }
-  }
+  };
 
-  handleAuthChange(): void {
+  handleAuthChange = (): void => {
     firebase.auth().onAuthStateChanged(user => {
       this.setState({ user });
       if (user) {
@@ -256,37 +248,37 @@ class App extends React.Component<Props, State> {
         this.getCategories();
       }
     });
-  }
+  };
 
-  handleLogOut(): void {
+  handleLogOut = (): void => {
     firebase
       .auth()
       .signOut()
       .then()
       .catch();
-  }
+  };
 
-  handleNav(page: string) {
+  handleNav = (page: string) => {
     this.setState({ page });
-  }
+  };
 
-  toggleShowForms(): void {
+  toggleShowForms = (): void => {
     const newState = !this.state.showForms;
     this.setState({
       showForms: newState
     });
-  }
+  };
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.handleAuthChange();
     this.userLoaded = true;
-  }
+  };
 
-  componentWillMount() {
+  componentWillMount = () => {
     this.userLoaded = false;
-  }
+  };
 
-  render() {
+  render = () => {
     const bodyStyles = {
       backgroundColor: Colors.lightShade
     };
@@ -351,7 +343,7 @@ class App extends React.Component<Props, State> {
         </div>
       </div>
     );
-  }
+  };
 }
 
 export default App;
