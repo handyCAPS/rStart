@@ -29,14 +29,14 @@ html {
 body {
 	padding: 0;
 	margin: 0;
-	font-family: var(--header-stack);
+	font-family: var(--body-stack);
 }
 
 h1, h2, h3, h4, h5, h6 {
 	padding: 0;
 	margin: 0;
 	margin-bottom: 0.618em;
-	font-family: var(--body-stack);
+	font-family: var(--header-stack);
 }
 
 ul, ol, dl {
