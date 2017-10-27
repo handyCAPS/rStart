@@ -8,11 +8,9 @@ type Props = {};
 type State = {};
 
 class Skeleton extends React.Component<Props, State> {
-  render() {
-    return (
-    	<div className="Skeleton"></div>
-      );
-  }
+  render = () => {
+    return <div className="Skeleton" />;
+  };
 }
 
 export default Skeleton;
