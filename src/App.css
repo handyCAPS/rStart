@@ -1,3 +1,20 @@
+@font-face {
+	font-family: 'Inter UI';
+  src: url('./fonts/InterUI/Inter-UI-Regular.woff2') format('woff2'),
+				url('./fonts/InterUI/Inter-UI-Regular.woff') format('woff'),
+				url('./fonts/InterUI/Inter-UI-Regular.ttf') format('truetype'),
+				url('./fonts/InterUI/Inter-UI-Regular.otf') format('otf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+:root {
+	--body-font: 'Inter UI';
+	--body-stack: var(--body-font), 'PT Sans', Arial, sans-serif;
+	--header-font: 'Arvo';
+	--header-stack: var(--header-font), Times, serif;
+}
+
 html {
 	font-size: 100%;
 	box-sizing: border-box;
@@ -12,13 +29,14 @@ html {
 body {
 	padding: 0;
 	margin: 0;
-	font-family: 'Arvo', sans-serif;
+	font-family: var(--header-stack);
 }
 
 h1, h2, h3, h4, h5, h6 {
 	padding: 0;
 	margin: 0;
 	margin-bottom: 0.618em;
+	font-family: var(--body-stack);
 }
 
 ul, ol, dl {
