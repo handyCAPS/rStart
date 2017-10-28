@@ -173,6 +173,14 @@ class App extends React.Component<Props, State> {
     }
   };
 
+  handleCatFormSubmit = (formValues: CategoryItem): void => {
+    const refString = [this.state.user.uid, this.Columns.category].join('/');
+    const itemsRef = firebase
+      .database()
+      .ref(refString)
+      .push(formValues);
+  };
+
   handleFormSubmit = (
     type: string,
     formValues: linkItem | CategoryItem
