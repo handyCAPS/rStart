@@ -45,7 +45,8 @@ class App extends React.Component<Props, State> {
   Columns: Columns;
   userLoaded: boolean;
 
-  handleFormSubmit: Function;
+  handleLinkFormSubmit: Function;
+  handleCatFormSubmit: Function;
   handleLoginSubmit: Function;
   handleDelete: Function;
   getLinks: Function;
@@ -175,50 +176,10 @@ class App extends React.Component<Props, State> {
 
   handleCatFormSubmit = (formValues: CategoryItem): void => {
     const refString = [this.state.user.uid, this.Columns.category].join('/');
-    const itemsRef = firebase
+    firebase
       .database()
       .ref(refString)
       .push(formValues);
-  };
-
-  handleFormSubmit = (
-    type: string,
-    formValues: linkItem | CategoryItem
-  ): void => {
-    const refString = [this.state.user.uid, type].join('/');
-    const itemsRef = firebase
-      .database()
-      .ref(refString)
-      .push();
-    let lastInsertID = false;
-    let values = { ...formValues };
-
-    if (type === this.Columns.link) {
-      values = this.prepareLinkForStorage(formValues);
-      lastInsertID = itemsRef.key;
-      if (values.image !== false) {
-        this.handleImageUpload(values.image, lastInsertID);
-        values = { ...values, image: false };
-      }
-    }
-
-    if (type === this.Columns.category) {
-      values = this.prepareCatForStorage(formValues);
-    }
-
-    itemsRef.set(values);
-
-    if (lastInsertID !== false) {
-      for (let cat in values.categories) {
-        firebase
-          .database()
-          .ref(this.state.user.uid)
-          .child(this.Columns.category + '/' + cat + '/members')
-          .update({
-            [lastInsertID]: true
-          });
-      }
-    }
   };
 
   handleImageUpload = (files: Array<any>, linkId: string): void => {
@@ -334,21 +295,13 @@ class App extends React.Component<Props, State> {
                   {this.state.categories.length > 0 && (
                     <LinkForm
                       categories={this.state.categories}
-                      handleSubmit={this.handleFormSubmit.bind(
-                        null,
-                        this.Columns.link
-                      )}>
+                      handleSubmit={this.handleLinkFormSubmit}>
                       <Button label="Image" />
                     </LinkForm>
                   )}
                 </div>,
                 <div className="container container--form container--form--category">
-                  <CatForm
-                    handleSubmit={this.handleFormSubmit.bind(
-                      null,
-                      this.Columns.category
-                    )}
-                  />
+                  <CatForm handleSubmit={this.handleCatFormSubmit} />
                 </div>,
                 <div className="container container--form container--form--image">
                   <ImageForm handleSubmit={this.handleImageFormSubmit} />
