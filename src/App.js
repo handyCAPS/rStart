@@ -55,7 +55,6 @@ class App extends React.Component<Props, State> {
   handleAuthChange: Function;
   handleLogOut: Function;
   handleImageFormSubmit: Function;
-  toggleShowForms: Function;
   handleNav: Function;
 
   constructor() {
@@ -120,7 +119,7 @@ class App extends React.Component<Props, State> {
     });
   };
 
-  prepareLinkForStorage(link: linkItem): linkStorageItem {
+  prepareLinkForStorage = (link: linkItem): linkStorageItem => {
     const protocolRegEx = /^https?:\/\//g;
     const linkUrl = protocolRegEx.test(link.link)
       ? link.link
@@ -136,14 +135,14 @@ class App extends React.Component<Props, State> {
       }
     };
     return storageItem;
-  }
+  };
 
-  prepareCatForStorage(formValues: CategoryItem): CategoryStorageItem {
+  prepareCatForStorage = (formValues: CategoryItem): CategoryStorageItem => {
     return {
       ...formValues,
       members: {}
     };
-  }
+  };
 
   handleFormSubmit = (
     type: string,
@@ -258,15 +257,8 @@ class App extends React.Component<Props, State> {
       .catch();
   };
 
-  handleNav = (page: string) => {
+  handleNav = (page: 'links' | 'forms') => {
     this.setState({ page });
-  };
-
-  toggleShowForms = (): void => {
-    const newState = !this.state.showForms;
-    this.setState({
-      showForms: newState
-    });
   };
 
   componentDidMount = () => {
