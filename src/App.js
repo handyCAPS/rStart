@@ -144,6 +144,35 @@ class App extends React.Component<Props, State> {
     };
   };
 
+  handleLinkFormSubmit = (formValues: linkItem): void => {
+    const refString = [this.state.user.uid, this.Columns.link].join('/');
+    const itemsRef = firebase
+      .database()
+      .ref(refString)
+      .push();
+    let lastInsertID = false;
+    let values = this.prepareLinkForStorage(formValues);
+    lastInsertID = itemsRef.key;
+    if (values.image !== false) {
+      this.handleImageUpload(values.image, lastInsertID);
+      values = { ...values, image: false };
+    }
+
+    itemsRef.set(values);
+
+    if (lastInsertID !== false) {
+      for (let cat in values.categories) {
+        firebase
+          .database()
+          .ref(this.state.user.uid)
+          .child(this.Columns.category + '/' + cat + '/members')
+          .update({
+            [lastInsertID]: true
+          });
+      }
+    }
+  };
+
   handleFormSubmit = (
     type: string,
     formValues: linkItem | CategoryItem
