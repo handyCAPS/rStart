@@ -15,6 +15,7 @@ import NavBar from './components/NavBar/NavBar';
 import firebase from './firebase';
 
 import type { LinkItem, LinkStorageItem } from './types/link.item.type';
+// import type { App } from 'firebase/app';
 
 import { Colors } from './vars/colors';
 
@@ -91,7 +92,8 @@ class App extends React.Component<Props, State> {
           title: items[item].title,
           link: items[item].link,
           description: items[item].description,
-          categories: Object.keys(items[item].categories)
+          categories: Object.keys(items[item].categories),
+          excludeFromBestOf: items[item].excludeFromBestOf
         });
       }
 
