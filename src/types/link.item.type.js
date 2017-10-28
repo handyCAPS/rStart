@@ -1,15 +1,16 @@
+// @flow
 export type LinkItem = {
   id?: string,
   title: string,
   link: string,
-  categories: Array<any>,
+  categories: any,
   description: string,
   excludeFromBestOf: boolean,
   imgLocation?: string
 };
 
 export type LinkStorageItem = LinkItem & {
-  dateAdded: string,
+  dateAdded: number,
   dateAltered?: string,
   clicks: number
 };

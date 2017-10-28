@@ -14,7 +14,7 @@ import NavBar from './components/NavBar/NavBar';
 
 import firebase from './firebase';
 
-import { linkItem, linkStorageItem } from './types/link.item.type';
+import type { LinkItem, LinkStorageItem } from './types/link.item.type';
 
 import { Colors } from './vars/colors';
 
@@ -34,7 +34,7 @@ type CategoryStorageItem = CategoryItem & {
 type Props = {};
 
 type State = {
-  links: Array<linkItem>,
+  links: Array<LinkItem>,
   categories: Array<any>,
   user: any,
   showForms: boolean,
@@ -120,12 +120,12 @@ class App extends React.Component<Props, State> {
     });
   };
 
-  prepareLinkForStorage = (link: linkItem): linkStorageItem => {
+  prepareLinkForStorage = (link: LinkItem): LinkStorageItem => {
     const protocolRegEx = /^https?:\/\//g;
     const linkUrl = protocolRegEx.test(link.link)
       ? link.link
       : 'http://' + link.link;
-    let storageItem = {
+    const storageItem: LinkStorageItem = {
       dateAdded: Date.now(),
       clicks: 0,
       excludeFromBestOf: false,
@@ -138,26 +138,15 @@ class App extends React.Component<Props, State> {
     return storageItem;
   };
 
-  prepareCatForStorage = (formValues: CategoryItem): CategoryStorageItem => {
-    return {
-      ...formValues,
-      members: {}
-    };
-  };
-
-  handleLinkFormSubmit = (formValues: linkItem): void => {
+  handleLinkFormSubmit = (formValues: LinkItem): void => {
     const refString = [this.state.user.uid, this.Columns.link].join('/');
     const itemsRef = firebase
       .database()
       .ref(refString)
       .push();
     let lastInsertID = false;
-    let values = this.prepareLinkForStorage(formValues);
+    let values: LinkStorageItem = this.prepareLinkForStorage(formValues);
     lastInsertID = itemsRef.key;
-    if (values.image !== false) {
-      this.handleImageUpload(values.image, lastInsertID);
-      values = { ...values, image: false };
-    }
 
     itemsRef.set(values);
 
