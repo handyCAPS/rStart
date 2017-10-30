@@ -3,7 +3,7 @@ import React from 'react';
 
 import './Select.css';
 
-import { InputSelect } from '../../types/input.type';
+import type { InputSelect } from '../../types/input.type';
 
 type Option = {
   value: string,
@@ -17,7 +17,8 @@ type SelectClassList = {
 
 type Props = InputSelect & {
   handleChange: Function,
-  classList?: SelectClassList
+  classList?: SelectClassList,
+  styles: any
 };
 
 type State = {};

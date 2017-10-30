@@ -5,7 +5,7 @@ import './StartForm.css';
 
 import Form from '../Form/Form';
 
-import { Input } from '../../types/input.type';
+import type { Input } from '../../types/input.type';
 import { Colors } from '../../vars/colors';
 
 type Props = {

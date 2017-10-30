@@ -3,7 +3,7 @@ import './LinkForm.css';
 
 import StartForm from '../StartForm/StartForm';
 
-import { Input, InputOption } from '../../types/input.type';
+import type { Input, InputOption } from '../../types/input.type';
 
 type Props = {
   categories: Array<any>,

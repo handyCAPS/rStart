@@ -3,7 +3,7 @@ import React from 'react';
 
 import './Link.css';
 
-import { LinkItem } from '../../types/link.item.type';
+import type { LinkItem } from '../../types/link.item.type';
 
 type Props = LinkItem & {
   handleDelete: Function,

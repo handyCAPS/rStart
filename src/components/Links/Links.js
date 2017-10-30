@@ -5,12 +5,12 @@ import './Links.css';
 
 import Link from '../Link/Link';
 
-import { linkItem, linkStorageItem } from '../../types/link.item.type';
+import type { LinkItem } from '../../types/link.item.type';
 
 import { Colors } from '../../vars/colors';
 
 type Props = {
-  links: Array<linkItem>,
+  links: Array<LinkItem>,
   handleDelete: Function
 };
 

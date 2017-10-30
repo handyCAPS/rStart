@@ -5,7 +5,7 @@ import './ImageForm.css';
 
 import StartForm from '../StartForm/StartForm';
 
-import { Input } from '../../types/input.type';
+import type { Input } from '../../types/input.type';
 
 type State = {
   inputArray: Array<Input>

@@ -2,7 +2,7 @@
 
 import StartForm from '../StartForm/StartForm';
 
-import { Input } from '../../types/input.type';
+import type { Input } from '../../types/input.type';
 
 import './LoginForm.css';
 
@@ -47,7 +47,10 @@ class LoginForm extends StartForm {
   }
 
   componentWillReceiveProps(nextProps: any) {
-    if (nextProps && Object.prototype.hasOwnProperty.call(nextProps, 'formName')) {
+    if (
+      nextProps &&
+      Object.prototype.hasOwnProperty.call(nextProps, 'formName')
+    ) {
       this.formName = nextProps.formName;
     }
   }

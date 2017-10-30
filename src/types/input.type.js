@@ -5,7 +5,7 @@ export type Input = {
   type?: string,
   children?: Array<any>,
   value: string | boolean | Array<any>,
-  errors: Array,
+  errors: Array<any>,
   attributes?: any
 };
 
