@@ -15,7 +15,9 @@ import NavBar from './components/NavBar/NavBar';
 import firebase from './firebase';
 
 import type { LinkItem, LinkStorageItem } from './types/link.item.type';
-// import type { App } from 'firebase/app';
+import type Firebase from 'firebase';
+import type { FirebaseUser } from 'firebase';
+import { DataSnapshot, Reference } from 'firebase/database';
 
 import { Colors } from './vars/colors';
 
@@ -36,9 +38,8 @@ type Props = {};
 
 type State = {
   links: Array<LinkItem>,
-  categories: Array<any>,
-  user: any,
-  showForms: boolean,
+  categories: Array<CategoryItem>,
+  user: FirebaseUser | null,
   page: 'forms' | 'links'
 };
 
@@ -65,8 +66,7 @@ class App extends React.Component<Props, State> {
     this.state = {
       links: [],
       categories: [],
-      user: false,
-      showForms: false,
+      user: null,
       page: 'links'
     };
 
@@ -82,9 +82,9 @@ class App extends React.Component<Props, State> {
       .ref(this.state.user.uid)
       .child(this.Columns.link);
 
-    itemsRef.on('value', snapshot => {
+    itemsRef.on('value', (snapshot: DataSnapshot) => {
       let items = snapshot.val();
-      let newState = [];
+      let newState: LinkItem[] = [];
 
       for (let item in items) {
         newState.push({
