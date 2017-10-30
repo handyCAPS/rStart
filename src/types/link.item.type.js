@@ -1,9 +1,12 @@
 // @flow
+export type linkCategories = {
+  [id: string]: boolean
+};
 export type LinkItem = {
   id?: string,
   title: string,
   link: string,
-  categories: any,
+  categories: string | linkCategories,
   description: string,
   excludeFromBestOf: boolean,
   imgLocation?: string

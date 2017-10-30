@@ -77,7 +77,7 @@ class App extends React.Component<Props, State> {
   }
 
   getLinks = () => {
-    const itemsRef = firebase
+    const itemsRef: Reference = firebase
       .database()
       .ref(this.state.user.uid)
       .child(this.Columns.link);
@@ -102,12 +102,12 @@ class App extends React.Component<Props, State> {
   };
 
   getCategories = () => {
-    const catsRef = firebase
+    const catsRef: Reference = firebase
       .database()
       .ref(this.state.user.uid)
       .child(this.Columns.category);
 
-    catsRef.on('value', snapshot => {
+    catsRef.on('value', (snapshot: DataSnapshot) => {
       let items = snapshot.val();
       let newState = [];
 
@@ -134,6 +134,8 @@ class App extends React.Component<Props, State> {
       ...link,
       link: linkUrl,
       categories: {
+        // flow sees link.categories as a boolean here. It is a string
+        // Need to rethink category storage in Link
         [link.categories]: true
       }
     };
@@ -146,13 +148,13 @@ class App extends React.Component<Props, State> {
       .database()
       .ref(refString)
       .push();
-    let lastInsertID = false;
+    let lastInsertID;
     let values: LinkStorageItem = this.prepareLinkForStorage(formValues);
     lastInsertID = itemsRef.key;
 
     itemsRef.set(values);
 
-    if (lastInsertID !== false) {
+    if (lastInsertID !== undefined) {
       for (let cat in values.categories) {
         firebase
           .database()
