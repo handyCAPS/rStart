@@ -6,7 +6,7 @@ export type LinkItem = {
   id?: string,
   title: string,
   link: string,
-  categories: string | linkCategories,
+  categories: string | Array<string> | linkCategories,
   description: string,
   excludeFromBestOf: boolean,
   imgLocation?: string

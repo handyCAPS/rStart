@@ -3,7 +3,7 @@ import StartForm from '../StartForm/StartForm';
 
 import './CatForm.css';
 
-import { Input } from '../../types/input.type';
+import type { Input } from '../../types/input.type';
 
 type Props = {
   handleSubmit: Function
