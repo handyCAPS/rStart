@@ -44,7 +44,7 @@ class LinkForm extends StartForm {
         id: 'categories',
         label: 'category',
         type: 'select',
-        children: categories,
+        inputChildren: categories,
         value: categories[0].value,
         errors: []
       },
@@ -90,8 +90,11 @@ class LinkForm extends StartForm {
     if (nextProps.categories.length > 0) {
       this.setState({
         inputArray: this.state.inputArray.reduce((p, c) => {
-          if (c.hasOwnProperty('children') && c.id === 'categories') {
-            c.children = this.catsToOptionsArray(nextProps.categories);
+          if (
+            Object.hasOwnProperty.call(c, 'inputChildren') &&
+            c.id === 'categories'
+          ) {
+            c.inputChildren = this.catsToOptionsArray(nextProps.categories);
             c.value =
               nextProps.categories.length > 0 &&
               nextProps.categories[0].hasOwnProperty('id')

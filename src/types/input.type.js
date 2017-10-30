@@ -3,8 +3,8 @@ export type Input = {
   id: string,
   label?: string,
   type?: string,
-  children?: Array<any>,
-  value: string | boolean | Array<any>,
+  inputChildren?: Array<any>,
+  value?: string | boolean | Array<any>,
   errors: Array<any>,
   attributes?: any
 };

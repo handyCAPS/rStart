@@ -7,7 +7,7 @@ import './Form.css';
 
 import Button from '../Button/Button.js';
 
-import { Input } from '../../types/input.type';
+import type { Input } from '../../types/input.type';
 
 type FormStyles = {
   form?: any,

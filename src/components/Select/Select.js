@@ -18,7 +18,8 @@ type SelectClassList = {
 type Props = InputSelect & {
   handleChange: Function,
   classList?: SelectClassList,
-  styles: any
+  styles: any,
+  options: Array<Option>
 };
 
 type State = {};

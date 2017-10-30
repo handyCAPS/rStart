@@ -12,7 +12,7 @@ type Props = {
   key: number,
   index: number,
   type?: string,
-  children?: Array<any>,
+  inputChildren?: Array<any>,
   value?: string,
   attributes?: any,
   files?: any,
@@ -63,11 +63,14 @@ class FormInputGroup extends React.Component<Props, State> {
   }
 
   getStyles(type: string) {
-    if (this.props.styles !== undefined) {
-      if (this.props.styles.hasOwnProperty(type)) {
+    if (this.props.styles != null) {
+      if (Object.hasOwnProperty.call(this.props.styles, type)) {
         return this.props.styles[type];
       }
-      if (this.props.styles.hasOwnProperty('all') && type !== 'label') {
+      if (
+        Object.hasOwnProperty.call(this.props.styles, 'all') &&
+        type !== 'label'
+      ) {
         return this.props.styles['all'];
       }
     }
@@ -105,7 +108,7 @@ class FormInputGroup extends React.Component<Props, State> {
               options: ['Form__option']
             }}
             handleChange={this.handleChange}
-            options={this.props.children}
+            options={this.props.inputChildren}
           />
         )}
         {this.props.type === 'textarea' && (
