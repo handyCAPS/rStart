@@ -96,7 +96,7 @@ class Form extends React.Component<Props, State> {
     });
   }
 
-  handleSubmit(event: Event) {
+  handleSubmit(event: SyntheticEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!this.checkFormForErrors()) {
       return;

@@ -50,8 +50,8 @@ class FormInputGroup extends React.Component<Props, State> {
     return classLists[type].join(' ');
   }
 
-  handleChange(event: Event) {
-    let value = event.target.value;
+  handleChange(event: SyntheticEvent<HTMLInputElement>) {
+    let value = event.currentTarget.value;
     if (this.props.type === 'file') {
       value = event.target.files ? event.target.files : [];
     }
