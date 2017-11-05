@@ -64,11 +64,11 @@ class FormInputGroup extends React.Component<Props, State> {
 
   getStyles(type: string) {
     if (this.props.styles != null) {
-      if (Object.hasOwnProperty.call(this.props.styles, type)) {
+      if (Object.prototype.hasOwnProperty.call(this.props.styles, type)) {
         return this.props.styles[type];
       }
       if (
-        Object.hasOwnProperty.call(this.props.styles, 'all') &&
+        Object.prototype.hasOwnProperty.call(this.props.styles, 'all') &&
         type !== 'label'
       ) {
         return this.props.styles['all'];

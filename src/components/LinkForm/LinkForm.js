@@ -91,13 +91,16 @@ class LinkForm extends StartForm {
       this.setState({
         inputArray: this.state.inputArray.reduce((p, c) => {
           if (
-            Object.hasOwnProperty.call(c, 'inputChildren') &&
+            Object.prototype.hasOwnProperty.call(c, 'inputChildren') &&
             c.id === 'categories'
           ) {
             c.inputChildren = this.catsToOptionsArray(nextProps.categories);
             c.value =
               nextProps.categories.length > 0 &&
-              nextProps.categories[0].hasOwnProperty('id')
+              Object.prototype.hasOwnProperty.call(
+                nextProps.categories[0],
+                'id'
+              )
                 ? nextProps.categories[0].id
                 : '';
           }
