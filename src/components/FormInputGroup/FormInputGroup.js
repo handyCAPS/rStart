@@ -38,7 +38,7 @@ class FormInputGroup extends React.Component<Props, State> {
     this.getStyles = this.getStyles.bind(this);
   }
 
-  getClassList(type: string) {
+  getClassList(type: string): string {
     const inputType = this.props.type ? this.props.type : 'text';
     const labelClasses = this.props.labelClasses ? this.props.labelClasses : [];
     const inputClasses = this.props.inputClasses ? this.props.inputClasses : [];
@@ -50,7 +50,7 @@ class FormInputGroup extends React.Component<Props, State> {
     return classLists[type].join(' ');
   }
 
-  handleChange(event: SyntheticEvent<HTMLInputElement>) {
+  handleChange(event: SyntheticEvent<HTMLInputElement>): void {
     let value = event.currentTarget.value;
     if (this.props.type === 'file') {
       value = event.target.files ? event.target.files : [];
@@ -58,21 +58,20 @@ class FormInputGroup extends React.Component<Props, State> {
     this.props.handleChange(this.props.index, value);
   }
 
-  handleCheckboxChange(checked: boolean) {
+  handleCheckboxChange(checked: boolean): void {
     this.props.handleChange(this.props.index, checked);
   }
 
-  getStyles(type: string) {
-    if (this.props.styles != null) {
-      if (Object.prototype.hasOwnProperty.call(this.props.styles, type)) {
-        return this.props.styles[type];
-      }
-      if (
-        Object.prototype.hasOwnProperty.call(this.props.styles, 'all') &&
-        type !== 'label'
-      ) {
-        return this.props.styles['all'];
-      }
+  getStyles(type: string): Object {
+    if (this.props.style == null) return {};
+    if (Object.prototype.hasOwnProperty.call(this.props.styles, type)) {
+      return this.props.styles[type];
+    }
+    if (
+      Object.prototype.hasOwnProperty.call(this.props.styles, 'all') &&
+      type !== 'label'
+    ) {
+      return this.props.styles['all'];
     }
     return {};
   }
